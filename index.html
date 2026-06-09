@@ -75,42 +75,14 @@ body.cursor-hover #cursor{width:0;height:0;background:transparent}
 body.cursor-hover #cursor-ring{width:48px;height:48px;border-color:var(--gold)}
 
 /* ─────────────────────────────────────────
-   LOADER
+   LOADER (kept minimal, fades quickly)
 ───────────────────────────────────────── */
 #loader{
   position:fixed;inset:0;background:var(--black);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  z-index:99997;transition:opacity 1s var(--ease),visibility 1s;
+  z-index:99997;transition:opacity 0.4s ease,visibility 0.4s;
 }
-#loader.out{opacity:0;visibility:hidden}
-.loader-word{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(1.4rem,3vw,2rem);
-  letter-spacing:0.6em;text-transform:uppercase;
-  color:var(--white);font-weight:400;
-  overflow:hidden;
-}
-.loader-word span{
-  display:inline-block;
-  animation:loaderDrop 1.2s var(--ease) forwards;
-  opacity:0;transform:translateY(30px);
-}
-.loader-sub{
-  font-size:0.62rem;letter-spacing:0.45em;text-transform:uppercase;
-  color:var(--gold);margin-top:12px;font-weight:300;
-  opacity:0;animation:fadeIn 1s 1s forwards;
-}
-.loader-progress{
-  width:120px;height:1px;background:var(--surface3);
-  margin-top:32px;overflow:hidden;
-}
-.loader-fill{
-  height:100%;width:0;background:var(--gold);
-  animation:loaderFill 2.2s var(--ease) forwards;
-}
-@keyframes loaderDrop{to{opacity:1;transform:translateY(0)}}
-@keyframes loaderFill{to{width:100%}}
-@keyframes fadeIn{to{opacity:1}}
+#loader.out{opacity:0;visibility:hidden;pointer-events:none}
 
 /* ─────────────────────────────────────────
    NAVIGATION
@@ -825,13 +797,7 @@ footer{
 <div id="cursor-ring"></div>
 
 <!-- LOADER -->
-<div id="loader">
-  <div class="loader-word">
-    <span style="animation-delay:0s">I</span><span style="animation-delay:0.04s">N</span><span style="animation-delay:0.08s">T</span><span style="animation-delay:0.12s">E</span><span style="animation-delay:0.16s">R</span><span style="animation-delay:0.22s">&nbsp;</span><span style="animation-delay:0.28s">D</span><span style="animation-delay:0.32s">E</span><span style="animation-delay:0.36s">S</span><span style="animation-delay:0.4s">I</span><span style="animation-delay:0.44s">G</span><span style="animation-delay:0.48s">N</span><span style="animation-delay:0.52s">S</span>
-  </div>
-  <div class="loader-sub">Kilpauk · Chennai</div>
-  <div class="loader-progress"><div class="loader-fill"></div></div>
-</div>
+<div id="loader"></div>
 
 <!-- NAV -->
 <nav id="navbar">
@@ -1480,12 +1446,7 @@ footer{
 
 <script>
 /* ── LOADER ── */
-(function(){
-  function hideLoader(){ document.getElementById('loader').classList.add('out'); }
-  if(document.readyState === 'complete'){ hideLoader(); }
-  else { window.addEventListener('load', hideLoader); }
-  setTimeout(hideLoader, 1800);
-})();
+document.getElementById('loader').classList.add('out');
 
 /* ── CURSOR (deferred, desktop only) ── */
 if(window.innerWidth > 768){
