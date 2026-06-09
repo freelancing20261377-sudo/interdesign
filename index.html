@@ -8,7 +8,9 @@
 <title>Inter Designs | Luxury Interior Design Studio · Chennai</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@200;300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@200;300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap&font-display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@200;300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet"></noscript>
+<link rel="preload" href="images/frame_0001.webp" as="image">
 <style>
 /* ─────────────────────────────────────────
    ROOT TOKENS
@@ -185,22 +187,28 @@ nav.scrolled{
 #hero{
   position:relative;
   height:300vh;
+  margin:0;
+  padding:0;
 }
 .hero-sticky{
   position:sticky;
   top:0;
+  left:0;
+  width:100vw;
   height:100vh;
   overflow:hidden;
   background:#080808 url('images/frame_0001.webp') center/cover no-repeat;
+  margin:0;
+  padding:0;
 }
 #heroCanvas{
   position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
+  top:0;left:0;
+  width:100vw;
+  height:100vh;
   display:block;
   opacity:0;
-  transition:opacity 0.3s;
+  transition:opacity 0.4s;
 }
 #heroCanvas.ready{opacity:1;}
 .hero-overlay{
@@ -760,12 +768,15 @@ footer{
 /* ─────────────────────────────────────────
    REVEAL ANIMATIONS
 ───────────────────────────────────────── */
-.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.8s var(--ease),transform 0.8s var(--ease)}
-.reveal.visible{opacity:1;transform:translateY(0)}
-.reveal-l{opacity:0;transform:translateX(-28px);transition:opacity 0.8s var(--ease),transform 0.8s var(--ease)}
-.reveal-l.visible{opacity:1;transform:translateX(0)}
-.reveal-r{opacity:0;transform:translateX(28px);transition:opacity 0.8s var(--ease),transform 0.8s var(--ease)}
-.reveal-r.visible{opacity:1;transform:translateX(0)}
+.reveal,.reveal-l,.reveal-r{opacity:1;transform:none}
+@media(prefers-reduced-motion:no-preference){
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.8s var(--ease),transform 0.8s var(--ease)}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+  .reveal-l{opacity:0;transform:translateX(-28px);transition:opacity 0.8s var(--ease),transform 0.8s var(--ease)}
+  .reveal-l.visible{opacity:1;transform:translateX(0)}
+  .reveal-r{opacity:0;transform:translateX(28px);transition:opacity 0.8s var(--ease),transform 0.8s var(--ease)}
+  .reveal-r.visible{opacity:1;transform:translateX(0)}
+}
 .delay-1{transition-delay:0.1s}
 .delay-2{transition-delay:0.2s}
 .delay-3{transition-delay:0.3s}
@@ -1469,27 +1480,32 @@ footer{
 
 <script>
 /* ── LOADER ── */
-window.addEventListener('load', () => {
-  setTimeout(() => document.getElementById('loader').classList.add('out'), 2600);
-});
-
-/* ── CURSOR ── */
-const cur = document.getElementById('cursor');
-const ring = document.getElementById('cursor-ring');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove', e => {
-  mx=e.clientX; my=e.clientY;
-  cur.style.left=mx+'px'; cur.style.top=my+'px';
-});
-(function animRing(){
-  rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
-  ring.style.left=rx+'px'; ring.style.top=ry+'px';
-  requestAnimationFrame(animRing);
+(function(){
+  function hideLoader(){ document.getElementById('loader').classList.add('out'); }
+  if(document.readyState === 'complete'){ hideLoader(); }
+  else { window.addEventListener('load', hideLoader); }
+  setTimeout(hideLoader, 1800);
 })();
-document.querySelectorAll('a,button,.svc-card,.p-item,.f-btn').forEach(el=>{
-  el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-hover'));
-  el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-hover'));
-});
+
+/* ── CURSOR (deferred, desktop only) ── */
+if(window.innerWidth > 768){
+  const cur = document.getElementById('cursor');
+  const ring = document.getElementById('cursor-ring');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove', e => {
+    mx=e.clientX; my=e.clientY;
+    cur.style.left=mx+'px'; cur.style.top=my+'px';
+  },{passive:true});
+  (function animRing(){
+    rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
+    ring.style.left=rx+'px'; ring.style.top=ry+'px';
+    requestAnimationFrame(animRing);
+  })();
+  document.querySelectorAll('a,button,.svc-card,.p-item,.f-btn').forEach(el=>{
+    el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-hover'),{passive:true});
+    el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-hover'),{passive:true});
+  });
+}
 
 /* ── NAV ── */
 const nav = document.getElementById('navbar');
@@ -1501,56 +1517,77 @@ const mob = document.getElementById('mobileMenu');
 ham.addEventListener('click', () => { ham.classList.toggle('open'); mob.classList.toggle('open'); });
 function closeMob(){ ham.classList.remove('open'); mob.classList.remove('open'); }
 
-/* ── HERO SCROLL FRAME ANIMATION (Canvas) ── */
+/* ── HERO SCROLL FRAME ANIMATION (Canvas, lazy-load) ── */
 (function(){
   const canvas = document.getElementById('heroCanvas');
   const ctx = canvas.getContext('2d');
   const totalFrames = 121;
-  const images = [];
-  let loadedCount = 0;
+  const images = new Array(totalFrames).fill(null);
   let currentFrame = 0;
+  let loadingQueue = false;
 
-  function resize(){
+  function setSize(){
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    if(images[currentFrame]) drawFrame(currentFrame);
+    drawFrame(currentFrame);
   }
-  window.addEventListener('resize', resize);
-  resize();
+  window.addEventListener('resize', setSize, {passive:true});
+  setSize();
 
   function drawFrame(i){
-    if(!images[i] || !images[i].complete) return;
     const img = images[i];
-    const cw = canvas.width, ch = canvas.height;
-    const iw = img.naturalWidth, ih = img.naturalHeight;
-    const scale = Math.max(cw/iw, ch/ih);
-    const dw = iw*scale, dh = ih*scale;
-    ctx.drawImage(img, (cw-dw)/2, (ch-dh)/2, dw, dh);
+    if(!img || !img.complete || !img.naturalWidth) return;
+    const cw=canvas.width, ch=canvas.height;
+    const iw=img.naturalWidth, ih=img.naturalHeight;
+    const scale=Math.max(cw/iw, ch/ih);
+    const dw=iw*scale, dh=ih*scale;
+    ctx.drawImage(img,(cw-dw)/2,(ch-dh)/2,dw,dh);
   }
 
-  function onScroll(){
-    const hero = document.getElementById('hero');
-    const rect = hero.getBoundingClientRect();
-    const progress = Math.max(0, Math.min(1, -rect.top / (hero.offsetHeight - window.innerHeight)));
-    const idx = Math.min(totalFrames-1, Math.floor(progress * totalFrames));
-    if(idx !== currentFrame){
-      currentFrame = idx;
-      drawFrame(currentFrame);
-    }
-  }
-  window.addEventListener('scroll', onScroll, {passive:true});
-
-  /* Preload all frames */
-  for(let i=1; i<=totalFrames; i++){
+  function loadFrame(i, cb){
+    if(images[i]){ if(cb) cb(); return; }
     const img = new Image();
-    const num = String(i).padStart(4,'0');
+    const num = String(i+1).padStart(4,'0');
+    img.onload = ()=>{ images[i]=img; if(cb) cb(); };
+    img.onerror = ()=>{ images[i]=img; };
     img.src = `images/frame_${num}.webp`;
-    img.onload = ()=>{
-      loadedCount++;
-      if(i===1){ drawFrame(0); canvas.classList.add('ready'); }
-    };
-    images[i-1] = img;
+    images[i] = img;
   }
+
+  /* Load first frame immediately */
+  loadFrame(0, ()=>{ drawFrame(0); canvas.classList.add('ready'); });
+
+  /* Lazy load rest after page is interactive, batched */
+  function loadBatch(start, end){
+    for(let i=start; i<end && i<totalFrames; i++) loadFrame(i);
+  }
+
+  const lazyLoad = typeof requestIdleCallback==='function' ? requestIdleCallback : setTimeout;
+  window.addEventListener('load', ()=>{
+    lazyLoad(()=> loadBatch(1, 20));
+    setTimeout(()=> lazyLoad(()=> loadBatch(20, 60)), 1500);
+    setTimeout(()=> lazyLoad(()=> loadBatch(60, 121)), 3000);
+  });
+
+  /* Scroll handler */
+  let ticking = false;
+  window.addEventListener('scroll', ()=>{
+    if(ticking) return;
+    ticking = true;
+    requestAnimationFrame(()=>{
+      const hero = document.getElementById('hero');
+      const rect = hero.getBoundingClientRect();
+      const progress = Math.max(0, Math.min(1, -rect.top / (hero.offsetHeight - window.innerHeight)));
+      const idx = Math.min(totalFrames-1, Math.floor(progress * totalFrames));
+      if(idx !== currentFrame){
+        currentFrame = idx;
+        if(images[idx] && images[idx].complete && images[idx].naturalWidth){
+          drawFrame(idx);
+        }
+      }
+      ticking = false;
+    });
+  },{passive:true});
 })();
 
 /* ── PORTFOLIO FILTERS ── */
