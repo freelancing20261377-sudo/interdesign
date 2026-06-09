@@ -180,26 +180,33 @@ nav.scrolled{
 .mobile-menu a:hover{color:var(--gold)}
 
 /* ─────────────────────────────────────────
-   HERO
+   HERO - SCROLL FRAME ANIMATION
 ───────────────────────────────────────── */
 #hero{
-  position:relative;height:100vh;min-height:640px;overflow:hidden;
+  position:relative;
+  height:300vh;
 }
-.hero-slide{
-  position:absolute;inset:0;opacity:0;
-  transition:opacity 2s cubic-bezier(0.4,0,0.2,1);
+.hero-sticky{
+  position:sticky;
+  top:0;
+  height:100vh;
+  overflow:hidden;
+  background:#080808 url('images/frame_0001.webp') center/cover no-repeat;
 }
-.hero-slide.active{opacity:1}
-.hero-slide img{
-  width:100%;height:100%;object-fit:cover;
-  transform:scale(1.06);
-  transition:transform 9s var(--ease);
-  will-change:transform;
+#heroCanvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
+  opacity:0;
+  transition:opacity 0.3s;
 }
-.hero-slide.active img{transform:scale(1)}
+#heroCanvas.ready{opacity:1;}
 .hero-overlay{
   position:absolute;inset:0;
   background:linear-gradient(to right,rgba(0,0,0,0.72) 0%,rgba(0,0,0,0.3) 55%,rgba(0,0,0,0.52) 100%);
+  pointer-events:none;
 }
 .hero-content{
   position:absolute;inset:0;
@@ -753,11 +760,11 @@ footer{
 /* ─────────────────────────────────────────
    REVEAL ANIMATIONS
 ───────────────────────────────────────── */
-.reveal{opacity:0;transform:translateY(36px);transition:opacity 0.9s var(--ease),transform 0.9s var(--ease)}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.8s var(--ease),transform 0.8s var(--ease)}
 .reveal.visible{opacity:1;transform:translateY(0)}
-.reveal-l{opacity:0;transform:translateX(-36px);transition:opacity 0.9s var(--ease),transform 0.9s var(--ease)}
+.reveal-l{opacity:0;transform:translateX(-28px);transition:opacity 0.8s var(--ease),transform 0.8s var(--ease)}
 .reveal-l.visible{opacity:1;transform:translateX(0)}
-.reveal-r{opacity:0;transform:translateX(36px);transition:opacity 0.9s var(--ease),transform 0.9s var(--ease)}
+.reveal-r{opacity:0;transform:translateX(28px);transition:opacity 0.8s var(--ease),transform 0.8s var(--ease)}
 .reveal-r.visible{opacity:1;transform:translateX(0)}
 .delay-1{transition-delay:0.1s}
 .delay-2{transition-delay:0.2s}
@@ -843,45 +850,24 @@ footer{
   <a href="#contact" onclick="closeMob()">Enquire</a>
 </div>
 
-<!-- HERO -->
+<!-- HERO - SCROLL FRAME ANIMATION -->
 <section id="hero">
-  <div class="hero-slide active" id="hs0">
-    <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb3?w=1400&q=65&auto=format" alt="Luxury Living Room" loading="eager" fetchpriority="high">
+  <div class="hero-sticky">
+    <canvas id="heroCanvas"></canvas>
     <div class="hero-overlay"></div>
-  </div>
-  <div class="hero-slide" id="hs1">
-    <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1400&q=65&auto=format" alt="Elegant Kitchen" loading="lazy">
-    <div class="hero-overlay"></div>
-  </div>
-  <div class="hero-slide" id="hs2">
-    <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1400&q=65&auto=format" alt="Luxury Bedroom" loading="lazy">
-    <div class="hero-overlay"></div>
-  </div>
-  <div class="hero-slide" id="hs3">
-    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1400&q=65&auto=format" alt="Office Interior" loading="lazy">
-    <div class="hero-overlay"></div>
-  </div>
-
-  <div class="hero-content">
-    <div class="hero-tag">Interior Design Studio · Chennai</div>
-    <h1 class="hero-h1">Designing Timeless Spaces<br>for <em>Modern Living</em></h1>
-    <p class="hero-sub">Luxury residential, commercial and villa interiors crafted with exceptional attention to detail.</p>
-    <div class="hero-actions">
-      <a href="#contact" class="btn-gold">Begin Your Project</a>
-      <a href="#portfolio" class="btn-ghost">View Portfolio</a>
+    <div class="hero-content">
+      <div class="hero-tag">Interior Design Studio · Chennai</div>
+      <h1 class="hero-h1">Designing Timeless Spaces<br>for <em>Modern Living</em></h1>
+      <p class="hero-sub">Luxury residential, commercial and villa interiors crafted with exceptional attention to detail.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-gold">Begin Your Project</a>
+        <a href="#portfolio" class="btn-ghost">View Portfolio</a>
+      </div>
     </div>
-  </div>
-
-  <div class="hero-scroll-hint">
-    <div class="scroll-bar"></div>
-    <span>Scroll</span>
-  </div>
-
-  <div class="hero-index" id="heroIndex">
-    <div class="hero-index-line active" onclick="gotoSlide(0)"></div>
-    <div class="hero-index-line" onclick="gotoSlide(1)"></div>
-    <div class="hero-index-line" onclick="gotoSlide(2)"></div>
-    <div class="hero-index-line" onclick="gotoSlide(3)"></div>
+    <div class="hero-scroll-hint">
+      <div class="scroll-bar"></div>
+      <span>Scroll</span>
+    </div>
   </div>
 </section>
 
@@ -1515,18 +1501,57 @@ const mob = document.getElementById('mobileMenu');
 ham.addEventListener('click', () => { ham.classList.toggle('open'); mob.classList.toggle('open'); });
 function closeMob(){ ham.classList.remove('open'); mob.classList.remove('open'); }
 
-/* ── HERO SLIDER ── */
-let hCur=0;
-const hSlides = document.querySelectorAll('.hero-slide');
-const hLines  = document.querySelectorAll('.hero-index-line');
-function gotoSlide(n){
-  hSlides[hCur].classList.remove('active');
-  hLines[hCur].classList.remove('active');
-  hCur = n;
-  hSlides[hCur].classList.add('active');
-  hLines[hCur].classList.add('active');
-}
-setInterval(()=>gotoSlide((hCur+1)%hSlides.length), 6500);
+/* ── HERO SCROLL FRAME ANIMATION (Canvas) ── */
+(function(){
+  const canvas = document.getElementById('heroCanvas');
+  const ctx = canvas.getContext('2d');
+  const totalFrames = 121;
+  const images = [];
+  let loadedCount = 0;
+  let currentFrame = 0;
+
+  function resize(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    if(images[currentFrame]) drawFrame(currentFrame);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  function drawFrame(i){
+    if(!images[i] || !images[i].complete) return;
+    const img = images[i];
+    const cw = canvas.width, ch = canvas.height;
+    const iw = img.naturalWidth, ih = img.naturalHeight;
+    const scale = Math.max(cw/iw, ch/ih);
+    const dw = iw*scale, dh = ih*scale;
+    ctx.drawImage(img, (cw-dw)/2, (ch-dh)/2, dw, dh);
+  }
+
+  function onScroll(){
+    const hero = document.getElementById('hero');
+    const rect = hero.getBoundingClientRect();
+    const progress = Math.max(0, Math.min(1, -rect.top / (hero.offsetHeight - window.innerHeight)));
+    const idx = Math.min(totalFrames-1, Math.floor(progress * totalFrames));
+    if(idx !== currentFrame){
+      currentFrame = idx;
+      drawFrame(currentFrame);
+    }
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+
+  /* Preload all frames */
+  for(let i=1; i<=totalFrames; i++){
+    const img = new Image();
+    const num = String(i).padStart(4,'0');
+    img.src = `images/frame_${num}.webp`;
+    img.onload = ()=>{
+      loadedCount++;
+      if(i===1){ drawFrame(0); canvas.classList.add('ready'); }
+    };
+    images[i-1] = img;
+  }
+})();
 
 /* ── PORTFOLIO FILTERS ── */
 document.querySelectorAll('.f-btn').forEach(btn=>{
@@ -1554,7 +1579,7 @@ setInterval(()=>gotoT(tCur+1), 7000);
 /* ── REVEAL ON SCROLL ── */
 const observer = new IntersectionObserver(entries=>{
   entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); }});
-},{threshold:0.1});
+},{threshold:0.05,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el=>observer.observe(el));
 
 /* ── FORM SUBMIT ── */
