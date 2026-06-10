@@ -15,19 +15,25 @@
    ROOT TOKENS
 ───────────────────────────────────────── */
 :root {
-  --gold:         #B8975A;
-  --gold-light:   #D4B07A;
-  --gold-dim:     rgba(184,151,90,0.18);
-  --black:        #080808;
-  --ink:          #0E0E0E;
-  --surface:      #111111;
-  --surface2:     #161616;
-  --surface3:     #1C1C1C;
+  --gold:         #C7A86D;
+  --gold-light:   #DCC290;
+  --gold-dim:     rgba(199,168,109,0.18);
+  --black:        #0F1115;
+  --ink:          #0B0D11;
+  --navy:         #1B2234;
+  --surface:      #14171F;
+  --surface2:     #1B2234;
+  --surface3:     #222B3E;
   --white:        #FFFFFF;
-  --cream:        #F5F1EA;
-  --muted:        rgba(255,255,255,0.45);
+  --cream:        #F8F5F0;
+  --ivory:        #F8F5F0;
+  --ivory2:       #F1ECE2;
+  --char:         #15171C;
+  --char-soft:    rgba(21,23,28,0.64);
+  --muted:        rgba(255,255,255,0.48);
   --subtle:       rgba(255,255,255,0.12);
-  --line:         rgba(184,151,90,0.18);
+  --line:         rgba(199,168,109,0.22);
+  --line-dark:    rgba(21,23,28,0.12);
   --ease:         cubic-bezier(0.25,0.46,0.45,0.94);
   --ease-out:     cubic-bezier(0.0,0.0,0.2,1);
 }
@@ -36,15 +42,15 @@
    RESET + BASE
 ───────────────────────────────────────── */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;overflow-x:hidden;font-size:16px}
+html{overflow-x:hidden;font-size:16px}
 body{
   font-family:'Inter',sans-serif;
   background:var(--black);
   color:var(--white);
   overflow-x:hidden;
-  cursor:none;
   -webkit-font-smoothing:antialiased;
 }
+body.custom-cursor{cursor:none}
 img{display:block;max-width:100%}
 a{text-decoration:none;color:inherit}
 button{cursor:pointer;font-family:'Inter',sans-serif}
@@ -80,58 +86,88 @@ body.cursor-hover #cursor-ring{width:48px;height:48px;border-color:var(--gold)}
   position:fixed;inset:0;background:var(--black);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   z-index:99997;transition:opacity 0.4s ease,visibility 0.4s;
+  animation:fadeOut 0.6s ease 0.8s forwards;
 }
+@keyframes fadeOut{to{opacity:0;visibility:hidden;pointer-events:none}}
 #loader.out{opacity:0;visibility:hidden;pointer-events:none}
 
 /* ─────────────────────────────────────────
    NAVIGATION
 ───────────────────────────────────────── */
 nav{
-  position:fixed;top:0;left:0;right:0;z-index:1000;
-  padding:0 6%;height:72px;
+  position:fixed;top:22px;left:50%;
+  width:92%;max-width:1400px;
+  height:72px;
+  border-radius:999px;
+  background:linear-gradient(180deg,rgba(33,41,62,0.62),rgba(18,23,38,0.55));
+  backdrop-filter:blur(28px) saturate(150%);-webkit-backdrop-filter:blur(28px) saturate(150%);
+  border:1px solid rgba(255,255,255,0.09);
+  box-shadow:0 18px 50px rgba(0,0,0,0.22),inset 0 1px 0 rgba(255,255,255,0.10),inset 0 -1px 0 rgba(0,0,0,0.18);
+  z-index:1000;
+  padding:0 16px 0 34px;
   display:flex;align-items:center;justify-content:space-between;
-  transition:height 0.6s cubic-bezier(0.25,0.46,0.45,0.94), background 0.5s ease, backdrop-filter 0.5s ease, border-bottom 0.5s ease;
+  transform:translateX(-50%) translateY(0);
+  transition:transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94),background 0.4s ease,box-shadow 0.4s ease,height 0.4s ease;
 }
-nav.expanded{
-  height:88px;
-  background:rgba(8,8,8,0.88);
-  backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);
-  border-bottom:1px solid rgba(184,151,90,0.25);
+nav.nav-hidden{
+  transform:translateX(-50%) translateY(-180%);
 }
-nav.contracted{
-  height:64px;
-  background:rgba(8,8,8,0.75);
-  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--line);
+nav.nav-solid{
+  background:linear-gradient(180deg,rgba(22,28,45,0.86),rgba(14,18,30,0.82));
+  box-shadow:0 20px 55px rgba(0,0,0,0.36),inset 0 1px 0 rgba(255,255,255,0.08);
 }
 .nav-logo{
   font-family:'Playfair Display',serif;
-  font-size:1.25rem;font-weight:500;letter-spacing:0.08em;
+  font-size:1.22rem;font-weight:500;letter-spacing:0.24em;
   color:var(--white);
+  flex-shrink:0;text-transform:uppercase;
+  transition:opacity 0.3s ease;
 }
-.nav-logo em{color:var(--gold);font-style:normal}
+.nav-logo:hover{opacity:0.85}
+.nav-logo em{color:var(--gold);font-style:normal;font-weight:400}
 .nav-center{
-  display:flex;gap:40px;list-style:none;
+  display:flex;gap:56px;list-style:none;
   position:absolute;left:50%;transform:translateX(-50%);
 }
 .nav-center a{
-  font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;
-  color:var(--muted);font-weight:300;
-  transition:color 0.3s;position:relative;
+  font-size:11.5px;letter-spacing:0.3em;text-transform:uppercase;
+  color:rgba(255,255,255,0.74);font-weight:400;
+  transition:color 0.35s ease;
+  position:relative;padding:6px 0;
 }
 .nav-center a::after{
-  content:'';position:absolute;bottom:-6px;left:0;
-  width:0;height:1px;background:var(--gold);transition:width 0.4s var(--ease);
+  content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:0;height:1px;
+  background:linear-gradient(to right,transparent,var(--gold),transparent);
+  transition:width 0.4s var(--ease);
 }
-.nav-center a:hover{color:var(--white)}
-.nav-center a:hover::after{width:100%}
-.nav-right{display:flex;align-items:center;gap:24px}
+.nav-center a:hover{color:var(--gold)}
+.nav-center a:hover::after{width:130%}
+.nav-right{display:flex;align-items:center;gap:22px}
 .nav-contact{
-  font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;
-  border:1px solid var(--line);color:var(--gold);
-  padding:9px 22px;transition:all 0.3s;
+  font-size:11px;letter-spacing:0.24em;text-transform:uppercase;
+  background:linear-gradient(135deg,#E2CB9C 0%,#C7A86D 55%,#B5945A 100%);
+  color:#1B2234;
+  border-radius:999px;
+  height:44px;
+  padding:0 28px;
+  font-weight:600;
+  display:inline-flex;align-items:center;gap:9px;
+  box-shadow:0 8px 22px rgba(199,168,109,0.28),inset 0 1px 0 rgba(255,255,255,0.45);
+  transition:all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+  border:none;
+  cursor:pointer;
+  flex-shrink:0;
 }
-.nav-contact:hover{background:var(--gold);color:var(--black)}
+.nav-contact .arr{
+  display:inline-block;transition:transform 0.4s var(--ease);
+  font-size:0.95em;line-height:1;
+}
+.nav-contact:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 34px rgba(199,168,109,0.42),inset 0 1px 0 rgba(255,255,255,0.55);
+}
+.nav-contact:hover .arr{transform:translateX(4px)}
 .hamburger{
   display:none;flex-direction:column;gap:5px;
   cursor:pointer;padding:4px;
@@ -167,6 +203,7 @@ nav.contracted{
   margin:0;
   padding:0;
   overflow:hidden;
+  background:#1B2234;
 }
 .hero-bg{
   position:absolute;
@@ -175,57 +212,74 @@ nav.contracted{
   background-position:center;
   opacity:0;
   transition:opacity 1.2s ease-in-out;
+  filter:contrast(1.05)saturate(1.08)sepia(0.03);
 }
 .hero-bg.active{opacity:1;}
 .hero-overlay{
   position:absolute;inset:0;
-  background:linear-gradient(to bottom,rgba(0,0,0,0.15) 0%,rgba(0,0,0,0.35) 100%);
+  background:transparent;
   pointer-events:none;
 }
 .hero-content{
   position:absolute;inset:0;
   display:flex;flex-direction:column;justify-content:flex-end;
-  padding:0 8% 9vh;z-index:2;
-  max-width:760px;
+  padding:0 12% 16vh;z-index:2;
+  max-width:42%;
+  min-width:380px;
 }
 .hero-tag{
   font-size:0.6rem;letter-spacing:0.5em;text-transform:uppercase;
-  color:var(--gold);font-weight:300;margin-bottom:20px;
+  color:#E2CB9C;font-weight:500;margin-bottom:24px;
+  text-shadow:0 1px 8px rgba(0,0,0,0.55);
   opacity:0;animation:slideUp 1s 0.6s var(--ease) forwards;
 }
 .hero-h1{
   font-family:'Playfair Display',serif;
-  font-size:clamp(2.8rem,5.5vw,5.2rem);
-  font-weight:400;line-height:1.08;letter-spacing:-0.01em;
-  color:var(--white);
+  font-size:clamp(2.4rem,4.8vw,4.8rem);
+  font-weight:600;line-height:1.12;letter-spacing:-0.02em;
+  color:#FFFFFF;
+  text-shadow:0 2px 18px rgba(0,0,0,0.45),0 1px 4px rgba(0,0,0,0.3);
   opacity:0;animation:slideUp 1s 0.9s var(--ease) forwards;
 }
-.hero-h1 em{color:var(--gold);font-style:italic}
+.hero-h1 em{color:#C8A96B;font-style:italic;font-weight:400}
 .hero-sub{
-  margin-top:22px;
-  font-size:clamp(0.82rem,1.2vw,0.95rem);
-  color:rgba(255,255,255,0.6);font-weight:300;line-height:1.75;
-  letter-spacing:0.03em;max-width:480px;
+  margin-top:28px;
+  font-size:clamp(0.85rem,1.2vw,0.98rem);
+  color:#FFFFFF;font-weight:400;line-height:1.8;
+  letter-spacing:0.02em;max-width:460px;
+  text-shadow:0 1px 10px rgba(0,0,0,0.5),0 1px 3px rgba(0,0,0,0.35);
   opacity:0;animation:slideUp 1s 1.2s var(--ease) forwards;
 }
 .hero-actions{
-  display:flex;gap:14px;margin-top:36px;flex-wrap:wrap;
+  display:flex;gap:14px;margin-top:52px;flex-wrap:wrap;
   opacity:0;animation:slideUp 1s 1.5s var(--ease) forwards;
 }
 .btn-gold{
-  background:var(--gold);color:var(--black);
-  padding:14px 34px;font-size:0.68rem;letter-spacing:0.25em;
-  text-transform:uppercase;font-weight:500;border:none;
-  transition:all 0.35s var(--ease);display:inline-block;
+  background:#D4B978;color:#1E2538;
+  padding:16px 40px;font-size:0.7rem;letter-spacing:0.28em;
+  text-transform:uppercase;font-weight:600;border-radius:999px;border:none;
+  transition:all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);display:inline-block;
 }
-.btn-gold:hover{background:var(--gold-light);transform:translateY(-2px)}
+.btn-gold:hover{
+  background:#D4B978;
+  transform:translateY(-3px);
+  box-shadow:0 12px 35px rgba(212,185,120,0.4);
+}
 .btn-ghost{
-  border:1px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.75);
-  padding:14px 34px;font-size:0.68rem;letter-spacing:0.25em;
-  text-transform:uppercase;font-weight:300;
-  transition:all 0.35s var(--ease);display:inline-block;
+  border:1px solid rgba(255,255,255,0.3);color:rgba(255,255,255,0.9);
+  padding:16px 40px;font-size:0.7rem;letter-spacing:0.28em;
+  text-transform:uppercase;font-weight:400;border-radius:999px;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  transition:all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);display:inline-block;
 }
-.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.btn-ghost:hover{
+  border-color:rgba(255,255,255,0.6);
+  color:#FFFFFF;
+  background:rgba(255,255,255,0.15);
+  transform:translateY(-3px);
+  box-shadow:0 8px 25px rgba(0,0,0,0.2);
+}
 .hero-index{
   position:absolute;bottom:8vh;right:6%;
   display:flex;flex-direction:column;gap:8px;z-index:2;
@@ -256,16 +310,16 @@ nav.contracted{
 /* ─────────────────────────────────────────
    SHARED UTILITIES
 ───────────────────────────────────────── */
-section{padding:110px 6%}
+section{padding:150px 7%}
 .cv-auto{content-visibility:auto;contain-intrinsic-size: 1000px}
 .lbl{
   font-size:0.6rem;letter-spacing:0.5em;text-transform:uppercase;
-  color:var(--gold);font-weight:300;margin-bottom:14px;display:block;
+  color:var(--gold);font-weight:400;margin-bottom:16px;display:block;
 }
 .sec-title{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(2rem,3.8vw,3.4rem);
-  font-weight:400;line-height:1.15;color:var(--white);
+  font-family:'Cormorant Garamond','Playfair Display',serif;
+  font-size:clamp(2.4rem,4.4vw,4rem);
+  font-weight:400;line-height:1.12;color:var(--white);letter-spacing:-0.01em;
 }
 .sec-title em{color:var(--gold);font-style:italic}
 .rule{
@@ -279,6 +333,41 @@ section{padding:110px 6%}
 }
 
 /* ─────────────────────────────────────────
+   LIGHT EDITORIAL THEME
+───────────────────────────────────────── */
+.theme-light{background:var(--ivory)!important;color:var(--char)}
+.theme-light .sec-title,
+.theme-light h2,
+.theme-light h3,
+.theme-light h4{color:var(--char)}
+.theme-light .lbl{color:var(--gold)}
+.theme-light .about-copy p,
+.theme-light .p-step-desc,
+.theme-light .why-item p,
+.theme-light .contact-info p,
+.theme-light #cta-band p,
+.theme-light p{color:var(--char-soft)}
+.theme-light .rule{background:var(--gold)}
+.theme-light .about-stats,
+.theme-light .stat-cell{border-color:var(--line-dark)}
+.theme-light .stat-l{color:var(--char-soft)}
+.theme-light .about-img-secondary{outline-color:var(--ivory)}
+.theme-light .portfolio-filters,
+.theme-light .f-btn{border-color:var(--line-dark)}
+.theme-light .f-btn{color:var(--char-soft)}
+.theme-light .f-btn.active,
+.theme-light .f-btn:hover{background:var(--gold);color:#fff}
+.theme-light .p-step-num{background:var(--ivory);border-color:var(--line-dark)}
+.theme-light .p-step-title,
+.theme-light .why-item h4{color:var(--char)}
+.theme-light .process-steps::before{
+  background:linear-gradient(to right,transparent,var(--line-dark) 20%,var(--line-dark) 80%,transparent);
+}
+.theme-light .why-item,
+.theme-light .why-item:first-child{border-color:var(--line-dark)}
+.theme-light .gold-line{opacity:0.25}
+
+/* ─────────────────────────────────────────
    ABOUT
 ───────────────────────────────────────── */
 #about{background:var(--surface);overflow:hidden}
@@ -289,7 +378,7 @@ section{padding:110px 6%}
 .about-visual{position:relative;height:620px}
 .about-img-primary{
   position:absolute;top:0;left:0;
-  width:78%;height:88%;object-fit:cover;
+  width:100%;height:100%;object-fit:cover;
 }
 .about-img-secondary{
   position:absolute;bottom:0;right:0;
@@ -356,14 +445,14 @@ section{padding:110px 6%}
 }
 .svc-card img{
   width:100%;height:100%;object-fit:cover;
-  filter:brightness(0.45);
+  filter:brightness(0.85);
   transition:transform 0.9s var(--ease),filter 0.9s var(--ease);
   will-change:transform;
 }
-.svc-card:hover img{transform:scale(1.08);filter:brightness(0.28)}
+.svc-card:hover img{transform:scale(1.08);filter:brightness(0.65)}
 .svc-overlay{
   position:absolute;inset:0;
-  background:linear-gradient(to top,rgba(0,0,0,0.95) 0%,transparent 55%);
+  background:linear-gradient(to top,rgba(0,0,0,0.75) 0%,transparent 60%);
   display:flex;flex-direction:column;justify-content:flex-end;
   padding:32px 28px;
 }
@@ -413,56 +502,67 @@ section{padding:110px 6%}
 .f-btn:last-child{border-right:none}
 .f-btn.active,.f-btn:hover{background:var(--gold);color:var(--black)}
 .portfolio-grid{
-  display:grid;
-  grid-template-columns:repeat(12,1fr);
-  grid-template-rows:auto;
-  gap:3px;
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:clamp(16px,2vw,28px);
+  min-height:400px;
 }
 .p-item{
   position:relative;overflow:hidden;cursor:pointer;
+  aspect-ratio:4/3;
+  opacity:0;transform:translateY(24px);
+  transition:opacity 0.5s var(--ease),transform 0.5s var(--ease);
 }
-.p-item:nth-child(1){grid-column:span 7;aspect-ratio:16/10}
-.p-item:nth-child(2){grid-column:span 5;aspect-ratio:4/5}
-.p-item:nth-child(3){grid-column:span 4;aspect-ratio:4/5}
-.p-item:nth-child(4){grid-column:span 5;aspect-ratio:4/3}
-.p-item:nth-child(5){grid-column:span 3;aspect-ratio:3/4}
-.p-item:nth-child(6){grid-column:span 7;aspect-ratio:16/9}
+.p-item.visible{opacity:1;transform:translateY(0)}
 .p-item img{
   width:100%;height:100%;object-fit:cover;
-  transition:transform 0.9s var(--ease);will-change:transform;
+  transition:transform 0.8s var(--ease);will-change:transform;
+  opacity:0;
 }
-.p-item:hover img{transform:scale(1.07)}
+.p-item img.loaded{opacity:1;transition:opacity 0.4s ease}
+.p-item:hover img{transform:scale(1.03)}
 .p-overlay{
   position:absolute;inset:0;
-  background:rgba(0,0,0,0);
+  background:linear-gradient(to top,rgba(0,0,0,0.82) 0%,rgba(0,0,0,0.3) 50%,transparent 100%);
   display:flex;flex-direction:column;justify-content:flex-end;
-  padding:24px 20px;
-  transition:background 0.5s var(--ease);
+  padding:clamp(20px,2.5vw,32px);
+  opacity:0;transition:opacity 0.4s var(--ease);
 }
-.p-item:hover .p-overlay{background:rgba(0,0,0,0.72)}
+.p-item:hover .p-overlay{opacity:1}
 .p-info{
-  transform:translateY(12px);opacity:0;
-  transition:all 0.45s var(--ease);
+  transform:translateY(16px);opacity:0;
+  transition:all 0.4s var(--ease);
 }
 .p-item:hover .p-info{transform:translateY(0);opacity:1}
 .p-title{
   font-family:'Playfair Display',serif;
-  font-size:1.15rem;font-weight:400;color:var(--white);
-  margin-bottom:6px;
+  font-size:clamp(1rem,1.4vw,1.25rem);font-weight:400;color:var(--white);
+  margin-bottom:8px;
 }
 .p-meta{
-  display:flex;gap:14px;flex-wrap:wrap;
+  display:flex;gap:12px;flex-wrap:wrap;
 }
 .p-meta span{
-  font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;
+  font-size:0.58rem;letter-spacing:0.18em;text-transform:uppercase;
   color:var(--gold);
 }
-.p-meta .sep{color:var(--muted)}
+.p-meta .sep{color:rgba(255,255,255,0.4)}
+
+/* Skeleton Loader */
+.p-skeleton{
+  position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(255,255,255,0.05) 25%,rgba(255,255,255,0.1) 50%,rgba(255,255,255,0.05) 75%);
+  background-size:200% 100%;
+  animation:shimmer 1.5s infinite;
+}
+@keyframes shimmer{
+  0%{background-position:200% 0}
+  100%{background-position:-200% 0}
+}
 
 /* ─────────────────────────────────────────
    WHY US
 ───────────────────────────────────────── */
-#why{background:var(--black)}
+#why{background:var(--navy)}
 .why-wrap{
   display:grid;grid-template-columns:5fr 7fr;
   gap:100px;align-items:start;
@@ -614,62 +714,140 @@ section{padding:110px 6%}
 /* ─────────────────────────────────────────
    CONTACT
 ───────────────────────────────────────── */
-#contact{background:var(--surface)}
-.contact-wrap{display:grid;grid-template-columns:5fr 7fr;gap:100px;margin-top:56px}
-.contact-info h3{
-  font-family:'Playfair Display',serif;
-  font-size:1.7rem;font-weight:400;margin-bottom:16px;
+#contact{
+  position:relative;
+  background:var(--black);
+  padding-top:80px;padding-bottom:100px;
 }
-.contact-info p{color:var(--muted);font-size:0.88rem;line-height:1.9;font-weight:300}
-.contact-perks{margin-top:36px;display:flex;flex-direction:column;gap:0}
-.perk{
-  display:flex;gap:16px;align-items:center;
-  padding:18px 0;border-bottom:1px solid var(--subtle);
+#contact::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(circle at 78% 30%,rgba(199,168,109,0.07),transparent 55%);
 }
-.perk:first-child{border-top:1px solid var(--subtle)}
-.perk-icon{
-  width:38px;height:38px;border:1px solid var(--line);flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
+#contact > *{position:relative;z-index:1}
+.consult-head{max-width:560px}
+.consult-head .sec-title{margin-top:2px}
+.consult-wrap{
+  display:grid;grid-template-columns:0.92fr 1.08fr;
+  gap:clamp(56px,7vw,130px);margin-top:36px;align-items:start;
 }
-.perk-icon svg{width:16px;height:16px;stroke:var(--gold);fill:none;stroke-width:1.5}
-.perk-text h5{font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:3px}
-.perk-text p{font-size:0.8rem;color:var(--muted);font-weight:300}
-.contact-details{margin-top:36px;display:flex;flex-direction:column;gap:16px}
-.c-item{display:flex;gap:14px;align-items:flex-start}
-.c-icon{
-  width:38px;height:38px;border:1px solid var(--line);flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:0.9rem;
+
+/* ── EDITORIAL ASIDE ── */
+.consult-aside{display:flex;flex-direction:column}
+.consult-statement{
+  font-family:'Cormorant Garamond','Playfair Display',serif;
+  font-size:clamp(1.9rem,2.8vw,2.7rem);
+  font-weight:400;line-height:1.28;color:var(--white);
+  letter-spacing:-0.01em;
 }
-.c-item h5{font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:3px}
-.c-item p{font-size:0.84rem;color:var(--muted);font-weight:300}
-.contact-form{display:flex;flex-direction:column;gap:14px}
-.f-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.f-group{display:flex;flex-direction:column}
-.f-group label{
-  font-size:0.58rem;letter-spacing:0.28em;text-transform:uppercase;
-  color:var(--muted);margin-bottom:8px;
+.consult-statement em{color:var(--gold);font-style:italic}
+.consult-lead{
+  color:rgba(255,255,255,0.55);font-size:0.95rem;
+  line-height:2.05;font-weight:300;margin-top:26px;max-width:430px;
 }
-.f-group input,.f-group select,.f-group textarea{
-  background:rgba(255,255,255,0.03);
-  border:1px solid rgba(255,255,255,0.08);
-  color:var(--white);padding:14px 16px;
-  font-family:'Inter',sans-serif;font-size:0.86rem;font-weight:300;
-  outline:none;transition:border-color 0.3s;
-  appearance:none;-webkit-appearance:none;
+.consult-trust{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  margin-top:0;border-top:1px solid var(--subtle);
 }
-.f-group select option{background:var(--surface2)}
-.f-group input:focus,.f-group select:focus,.f-group textarea:focus{
-  border-color:rgba(184,151,90,0.45);
+.trust-cell{padding:26px 0 24px;border-bottom:1px solid var(--subtle)}
+.trust-n{
+  font-family:'Cormorant Garamond','Playfair Display',serif;
+  font-size:2.1rem;font-weight:500;color:var(--gold);line-height:1;display:block;
 }
-.f-group textarea{height:110px;resize:none}
-.f-submit{
-  background:var(--gold);color:var(--black);
-  border:none;padding:16px;
-  font-size:0.68rem;font-weight:500;letter-spacing:0.28em;
-  text-transform:uppercase;transition:all 0.3s;margin-top:4px;
+.trust-l{
+  font-size:0.56rem;letter-spacing:0.24em;text-transform:uppercase;
+  color:rgba(255,255,255,0.42);margin-top:9px;display:block;
 }
-.f-submit:hover{background:var(--gold-light);transform:translateY(-2px)}
-.f-note{font-size:0.68rem;color:var(--muted);text-align:center;margin-top:4px}
+.consult-image{
+  position:relative;margin-top:52px;height:230px;overflow:hidden;
+}
+.consult-image img{
+  width:100%;height:100%;object-fit:cover;
+  filter:contrast(1.05)saturate(1.05) brightness(0.82);
+  transition:transform 1s var(--ease);
+}
+.consult-image:hover img{transform:scale(1.05)}
+.consult-sign{
+  position:absolute;left:26px;bottom:22px;right:26px;
+}
+.consult-sign .nm{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:1.45rem;color:var(--white);line-height:1;
+}
+.consult-sign .rl{
+  font-size:0.56rem;letter-spacing:0.26em;text-transform:uppercase;
+  color:var(--gold);margin-top:8px;display:block;
+}
+.consult-lines{margin-top:46px;display:flex;flex-direction:column;gap:20px}
+.cl-item{display:flex;flex-direction:column;gap:5px}
+.cl-item .k{font-size:0.58rem;letter-spacing:0.26em;text-transform:uppercase;color:var(--gold)}
+.cl-item .v{font-size:0.88rem;color:rgba(255,255,255,0.7);font-weight:300;line-height:1.6}
+
+/* ── BOOKING CARD ── */
+.consult-card{
+  background:linear-gradient(180deg,rgba(255,255,255,0.065),rgba(255,255,255,0.025));
+  border:1px solid rgba(255,255,255,0.12);
+  padding:clamp(24px,2.5vw,40px) clamp(20px,2.5vw,36px);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+.consult-card .step{
+  font-size:0.58rem;letter-spacing:0.4em;text-transform:uppercase;
+  color:var(--gold);display:block;margin-bottom:16px;
+}
+.consult-card h3{
+  font-family:'Cormorant Garamond','Playfair Display',serif;
+  font-size:clamp(1.3rem,1.8vw,1.7rem);font-weight:400;
+  color:var(--white);line-height:1.2;
+}
+.consult-card .cf-sub{
+  color:rgba(255,255,255,0.5);font-size:0.86rem;line-height:1.8;
+  font-weight:300;margin-top:14px;max-width:440px;
+}
+.cf{display:flex;flex-direction:column;gap:18px;margin-top:24px}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.cf-field{display:flex;flex-direction:column;position:relative}
+.cf-field label{
+  font-size:0.56rem;letter-spacing:0.28em;text-transform:uppercase;
+  color:rgba(255,255,255,0.42);margin-bottom:12px;font-weight:400;
+}
+.cf-field input,.cf-field select,.cf-field textarea{
+  background:transparent;border:none;
+  border-bottom:1px solid rgba(255,255,255,0.13);
+  color:var(--white);padding:10px 0;
+  font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:300;
+  outline:none;transition:border-color 0.45s var(--ease);
+  appearance:none;-webkit-appearance:none;border-radius:0;
+}
+.cf-field input::placeholder,.cf-field textarea::placeholder{color:rgba(255,255,255,0.28)}
+.cf-field select{color:rgba(255,255,255,0.6);cursor:pointer}
+.cf-field select:valid{color:var(--white)}
+.cf-field select option{background:#1B2234;color:var(--white)}
+.cf-field.has-arrow::after{
+  content:'';position:absolute;right:2px;bottom:18px;
+  width:7px;height:7px;border-right:1px solid var(--gold);border-bottom:1px solid var(--gold);
+  transform:rotate(45deg);pointer-events:none;opacity:0.7;
+}
+.cf-field input:focus,.cf-field select:focus,.cf-field textarea:focus{
+  border-bottom-color:var(--gold);
+}
+.cf-field textarea{height:60px;resize:none;line-height:1.7}
+.cf-submit{
+  background:linear-gradient(135deg,#E2CB9C 0%,#C7A86D 55%,#B5945A 100%);
+  color:#1B2234;border:none;padding:19px;margin-top:8px;
+  font-size:0.66rem;font-weight:600;letter-spacing:0.3em;text-transform:uppercase;
+  display:inline-flex;align-items:center;justify-content:center;gap:12px;
+  box-shadow:0 10px 30px rgba(199,168,109,0.22),inset 0 1px 0 rgba(255,255,255,0.4);
+  transition:all 0.45s var(--ease);cursor:pointer;
+}
+.cf-submit .arr{display:inline-block;transition:transform 0.4s var(--ease)}
+.cf-submit:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(199,168,109,0.36),inset 0 1px 0 rgba(255,255,255,0.5)}
+.cf-submit:hover .arr{transform:translateX(5px)}
+.cf-foot{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  margin-top:22px;
+}
+.cf-foot span{font-size:0.7rem;color:rgba(255,255,255,0.4);font-weight:300}
+.cf-foot a{color:var(--gold);font-size:0.7rem;letter-spacing:0.08em;border-bottom:1px solid transparent;transition:border-color 0.3s}
+.cf-foot a:hover{border-bottom-color:var(--gold)}
 
 /* ─────────────────────────────────────────
    FOOTER
@@ -751,45 +929,132 @@ footer{
 .delay-5{transition-delay:0.5s}
 
 /* ─────────────────────────────────────────
-   RESPONSIVE
+   RESPONSIVE — TABLET (≤1100px)
 ───────────────────────────────────────── */
 @media(max-width:1100px){
-  .about-wrap,.why-wrap,.contact-wrap{grid-template-columns:1fr;gap:56px}
-  .about-visual{height:400px}
+  .about-wrap,.why-wrap,.consult-wrap{grid-template-columns:1fr;gap:56px}
+  .about-visual{height:480px}
   .why-visual img{height:400px}
   .services-grid{grid-template-columns:repeat(2,1fr)}
-  .portfolio-grid{grid-template-columns:1fr 1fr}
-  .p-item:nth-child(1),.p-item:nth-child(2),.p-item:nth-child(3),
-  .p-item:nth-child(4),.p-item:nth-child(5),.p-item:nth-child(6){
-    grid-column:span 1;aspect-ratio:4/3;
-  }
+  .portfolio-grid{grid-template-columns:repeat(2,1fr)}
   .footer-grid{grid-template-columns:1fr 1fr}
-  .nav-center{display:none}
+  nav{width:94%;padding:0 24px;height:60px}
+  .nav-center{gap:24px}
+  .nav-center a{font-size:11px;letter-spacing:0.18em}
+  .nav-contact{height:36px;padding:0 18px;font-size:11px}
+  .consult-wrap{grid-template-columns:1fr}
 }
+
+/* ─────────────────────────────────────────
+   RESPONSIVE — MOBILE (≤768px)
+───────────────────────────────────────── */
 @media(max-width:768px){
-  section{padding:72px 5%}
+  /* Base */
+  section{padding:64px 5%}
+  body{cursor:auto;overflow-x:hidden}
+
+  /* NAV */
+  nav{top:12px;width:92%;height:52px;padding:0 18px}
   .nav-center{display:none}
   .nav-contact{display:none}
+  .nav-logo{font-size:1.1rem;letter-spacing:0.14em}
   .hamburger{display:flex}
-  .services-grid{grid-template-columns:1fr}
-  .portfolio-grid{grid-template-columns:1fr}
-  .process-steps{flex-direction:column;gap:36px}
+  .hamburger span{height:1.5px}
+
+  /* MOBILE MENU */
+  .mobile-menu a{font-size:1.8rem;min-height:44px;display:flex;align-items:center}
+
+  /* HERO */
+  #hero{height:100svh;min-height:580px}
+  .hero-content{
+    padding:0 6% 12vh;
+    max-width:100%;min-width:0;
+    justify-content:flex-end;
+  }
+  .hero-tag{font-size:0.55rem;letter-spacing:0.35em;margin-bottom:14px}
+  .hero-h1{font-size:clamp(1.9rem,7vw,2.8rem);line-height:1.15;letter-spacing:-0.01em}
+  .hero-sub{font-size:0.82rem;margin-top:16px;line-height:1.7;max-width:100%}
+  .hero-actions{margin-top:28px}
+  .btn-gold{padding:14px 30px;font-size:0.62rem}
+  .hero-scroll-hint{display:none}
+
+  /* ABOUT */
+  .about-wrap{grid-template-columns:1fr;gap:40px}
+  .about-visual{height:320px;order:2}
+  .about-copy{order:1}
+  .about-img-primary{object-position:center top}
+  .about-year-badge{width:88px;height:88px;bottom:-16px;right:12px}
+  .about-year-badge .num{font-size:1.6rem}
+  .about-stats{grid-template-columns:repeat(3,1fr);gap:0}
+
+  /* SERVICES */
+  .services-grid{grid-template-columns:1fr;gap:2px}
+  .svc-card{aspect-ratio:4/3}
+  .services-header{flex-direction:column;align-items:flex-start;gap:16px}
+
+  /* PORTFOLIO */
+  .portfolio-grid{grid-template-columns:1fr;gap:12px}
+  .portfolio-top{flex-direction:column;align-items:flex-start;gap:16px}
+  .portfolio-filters{
+    display:flex;flex-wrap:wrap;gap:4px;
+    overflow-x:auto;-webkit-overflow-scrolling:touch;
+    padding-bottom:4px;
+  }
+  .f-btn{padding:9px 16px;font-size:0.58rem;white-space:nowrap;min-height:36px}
+
+  /* WHY US */
+  .why-wrap{grid-template-columns:1fr;gap:40px}
+  .why-visual img{height:320px;width:100%}
+  .why-badge{width:110px;height:110px;bottom:-20px;right:0}
+
+  /* PROCESS */
+  .process-steps{flex-direction:column;gap:32px}
   .process-steps::before{display:none}
-  .f-row{grid-template-columns:1fr}
-  .footer-grid{grid-template-columns:1fr}
-  body{cursor:auto}
-  #cursor,#cursor-ring{display:none}
-  .hero-content{padding:0 6% 10vh}
-  .services-header{flex-direction:column;align-items:flex-start;gap:20px}
-  .portfolio-top{flex-direction:column;align-items:flex-start;gap:20px}
+
+  /* TESTIMONIALS */
+  .testi-card{padding:32px 24px}
+  .testi-text{font-size:1rem}
+
+  /* CONTACT */
+  .consult-wrap{grid-template-columns:1fr;gap:40px}
+  .cf-row,.cf-row{grid-template-columns:1fr}
+  .consult-image{display:none}
+  .cf-field input,.cf-field select,.cf-field textarea{
+    font-size:16px; /* prevent iOS zoom */
+    padding:12px 0;
+  }
+  .cf-submit{padding:16px;font-size:0.62rem;width:100%}
+
+  /* FOOTER */
+  .footer-grid{grid-template-columns:1fr;gap:40px}
+  .footer-bottom{flex-direction:column;gap:12px;text-align:center}
+
+  /* WHATSAPP FAB */
+  .whatsapp-fab{bottom:24px;right:16px}
+
+  /* SECTION TITLES */
+  .sec-title{font-size:clamp(1.6rem,6vw,2.4rem)}
+
+  /* GOLD LINE */
+  .gold-line{margin:0}
+
+  /* CTA BAND */
+  #cta-band{padding:64px 5%}
+  #cta-band h2{font-size:clamp(1.6rem,6vw,2.4rem)}
+}
+
+/* ─────────────────────────────────────────
+   RESPONSIVE — SMALL MOBILE (≤400px)
+───────────────────────────────────────── */
+@media(max-width:400px){
+  section{padding:52px 4%}
+  .hero-h1{font-size:clamp(1.7rem,8vw,2.2rem)}
+  .about-stats{grid-template-columns:1fr 1fr}
+  .consult-trust{grid-template-columns:1fr 1fr}
 }
 </style>
 </head>
 <body>
-
-<!-- CURSOR -->
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
 
 <!-- LOADER -->
 <div id="loader"></div>
@@ -805,7 +1070,7 @@ footer{
     <li><a href="#testimonials">Reviews</a></li>
   </ul>
   <div class="nav-right">
-    <a href="#contact" class="nav-contact">Enquire</a>
+    <a href="#contact" class="nav-contact">Enquire<span class="arr">&#8594;</span></a>
     <div class="hamburger" id="hamburger">
       <span></span><span></span><span></span>
     </div>
@@ -824,18 +1089,16 @@ footer{
 
 <!-- HERO - BACKGROUND SLIDESHOW -->
 <section id="hero">
-  <div class="hero-bg active" style="background-image:url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1920&q=80&auto=format')"></div>
-  <div class="hero-bg" style="background-image:url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1920&q=80&auto=format')"></div>
-  <div class="hero-bg" style="background-image:url('https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1920&q=80&auto=format')"></div>
-  <div class="hero-bg" style="background-image:url('https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=1920&q=80&auto=format')"></div>
+  <div class="hero-bg active" style="background-image:url('homepage/1.png')"></div>
+  <div class="hero-bg" style="background-image:url('homepage/back.png')"></div>
+  <div class="hero-bg" style="background-image:url('homepage/image.png')"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <div class="hero-tag">Interior Design Studio · Chennai</div>
-    <h1 class="hero-h1">Designing Timeless Spaces<br>for <em>Modern Living</em></h1>
-    <p class="hero-sub">Luxury residential, commercial and villa interiors crafted with exceptional attention to detail.</p>
+    <div class="hero-tag">Luxury Interior Design · Chennai</div>
+    <h1 class="hero-h1">Designing Spaces<br>That <em>Endure</em></h1>
+    <p class="hero-sub">Timeless residential and architectural interiors, crafted with rare materials and uncompromising detail.</p>
     <div class="hero-actions">
       <a href="#contact" class="btn-gold">Begin Your Project</a>
-      <a href="#portfolio" class="btn-ghost">View Portfolio</a>
     </div>
   </div>
   <div class="hero-scroll-hint">
@@ -845,11 +1108,10 @@ footer{
 </section>
 
 <!-- ABOUT -->
-<section id="about" class="cv-auto">
+<section id="about" class="cv-auto theme-light">
   <div class="about-wrap">
     <div class="about-visual reveal-l">
-      <img class="about-img-primary" src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=70&auto=format" alt="Studio interior">
-      <img class="about-img-secondary" src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=70&auto=format" alt="Design detail" loading="lazy">
+      <img class="about-img-primary" src="2ndpage/Screenshot_2026-06-10_at_11.45.45_AM.png" alt="Studio interior" loading="lazy">
       <div class="about-year-badge">
         <span class="num">12+</span>
         <span class="lbl-sm">Years of Excellence</span>
@@ -892,7 +1154,7 @@ footer{
   <div class="services-grid">
 
     <div class="svc-card reveal delay-1">
-      <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=700&q=65&auto=format" alt="Residential" loading="lazy">
+      <img src="residential/image.png" alt="Residential" loading="lazy">
       <div class="svc-overlay">
         <span class="svc-num">01</span>
         <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="rgba(184,151,90,0.85)" stroke-width="1.2">
@@ -904,7 +1166,7 @@ footer{
     </div>
 
     <div class="svc-card reveal delay-2">
-      <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=700&q=65&auto=format" alt="Office" loading="lazy">
+      <img src="offices/office1.png" alt="Office" loading="lazy">
       <div class="svc-overlay">
         <span class="svc-num">02</span>
         <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="rgba(184,151,90,0.85)" stroke-width="1.2">
@@ -916,7 +1178,7 @@ footer{
     </div>
 
     <div class="svc-card reveal delay-3">
-      <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=700&q=65&auto=format" alt="Villa" loading="lazy">
+      <img src="villlas/villa1.png" alt="Villa" loading="lazy">
       <div class="svc-overlay">
         <span class="svc-num">03</span>
         <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="rgba(184,151,90,0.85)" stroke-width="1.2">
@@ -928,7 +1190,7 @@ footer{
     </div>
 
     <div class="svc-card reveal delay-1">
-      <img src="https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?w=700&q=65&auto=format" alt="Commercial" loading="lazy">
+      <img src="commercial/Screenshot_2026-06-10_at_10.55.45_AM.png" alt="Commercial" loading="lazy">
       <div class="svc-overlay">
         <span class="svc-num">04</span>
         <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="rgba(184,151,90,0.85)" stroke-width="1.2">
@@ -940,7 +1202,7 @@ footer{
     </div>
 
     <div class="svc-card reveal delay-2">
-      <img src="https://images.unsplash.com/photo-1556020685-ae41abfc9365?w=700&q=65&auto=format" alt="Kitchen" loading="lazy">
+      <img src="modular_kitchen/Screenshot_2026-06-10_at_11.18.30_AM.png" alt="Kitchen" loading="lazy">
       <div class="svc-overlay">
         <span class="svc-num">05</span>
         <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="rgba(184,151,90,0.85)" stroke-width="1.2">
@@ -951,130 +1213,28 @@ footer{
       </div>
     </div>
 
-    <div class="svc-card reveal delay-3">
-      <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=700&q=65&auto=format" alt="3D Design" loading="lazy">
-      <div class="svc-overlay">
-        <span class="svc-num">06</span>
-        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="rgba(184,151,90,0.85)" stroke-width="1.2">
-          <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>
-        </svg>
-        <div class="svc-name">3D Design & Visualisation</div>
-        <p class="svc-desc">Photorealistic renders so you experience your space in full detail before a single element is placed.</p>
-      </div>
-    </div>
-
   </div>
 </section>
 
 <div class="gold-line"></div>
 
 <!-- PORTFOLIO -->
-<section id="portfolio" class="cv-auto">
+<section id="portfolio" class="cv-auto theme-light">
   <div class="portfolio-top reveal">
     <div>
       <span class="lbl">Selected Work</span>
       <h2 class="sec-title">Featured <em>Projects</em></h2>
     </div>
     <div class="portfolio-filters">
-      <button class="f-btn active">All</button>
-      <button class="f-btn">Residential</button>
-      <button class="f-btn">Commercial</button>
-      <button class="f-btn">Offices</button>
-      <button class="f-btn">Villas</button>
+      <button class="f-btn active" data-filter="all">All</button>
+      <button class="f-btn" data-filter="residential">Residential</button>
+      <button class="f-btn" data-filter="commercial">Commercial</button>
+      <button class="f-btn" data-filter="offices">Offices</button>
+      <button class="f-btn" data-filter="villas">Villas</button>
     </div>
   </div>
-  <div class="portfolio-grid">
-
-    <div class="p-item reveal">
-      <img src="https://images.unsplash.com/photo-1616047006789-b7af5afb8c20?w=900&q=65&auto=format" alt="Living Room" loading="lazy">
-      <div class="p-overlay">
-        <div class="p-info">
-          <div class="p-title">The Arora Residence</div>
-          <div class="p-meta">
-            <span>Kilpauk, Chennai</span><span class="sep">·</span>
-            <span>Residential</span><span class="sep">·</span>
-            <span>2,400 sq ft</span><span class="sep">·</span>
-            <span>2024</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="p-item reveal delay-1">
-      <img src="https://images.unsplash.com/photo-1564078516393-cf04bd966897?w=700&q=65&auto=format" alt="Bedroom" loading="lazy">
-      <div class="p-overlay">
-        <div class="p-info">
-          <div class="p-title">Serenity Suite</div>
-          <div class="p-meta">
-            <span>Anna Nagar, Chennai</span><span class="sep">·</span>
-            <span>Residential</span><span class="sep">·</span>
-            <span>3,100 sq ft</span><span class="sep">·</span>
-            <span>2024</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="p-item reveal delay-2">
-      <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=700&q=65&auto=format" alt="Kitchen" loading="lazy">
-      <div class="p-overlay">
-        <div class="p-info">
-          <div class="p-title">The Grand Kitchen</div>
-          <div class="p-meta">
-            <span>Nungambakkam</span><span class="sep">·</span>
-            <span>Modular Kitchen</span><span class="sep">·</span>
-            <span>320 sq ft</span><span class="sep">·</span>
-            <span>2023</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="p-item reveal delay-1">
-      <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1000&q=65&auto=format" alt="Office" loading="lazy">
-      <div class="p-overlay">
-        <div class="p-info">
-          <div class="p-title">TechEdge Headquarters</div>
-          <div class="p-meta">
-            <span>Guindy, Chennai</span><span class="sep">·</span>
-            <span>Commercial Office</span><span class="sep">·</span>
-            <span>8,000 sq ft</span><span class="sep">·</span>
-            <span>2023</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="p-item reveal delay-2">
-      <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=65&auto=format" alt="Villa" loading="lazy">
-      <div class="p-overlay">
-        <div class="p-info">
-          <div class="p-title">The Crown Villa</div>
-          <div class="p-meta">
-            <span>ECR, Chennai</span><span class="sep">·</span>
-            <span>Villa</span><span class="sep">·</span>
-            <span>6,500 sq ft</span><span class="sep">·</span>
-            <span>2022</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="p-item reveal delay-3">
-      <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=900&q=65&auto=format" alt="Bathroom" loading="lazy">
-      <div class="p-overlay">
-        <div class="p-info">
-          <div class="p-title">Marble Retreat</div>
-          <div class="p-meta">
-            <span>Adyar, Chennai</span><span class="sep">·</span>
-            <span>Luxury Bathroom</span><span class="sep">·</span>
-            <span>280 sq ft</span><span class="sep">·</span>
-            <span>2023</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
+  <div class="portfolio-grid" id="portfolioGrid">
+    <!-- Project cards will be dynamically generated by JavaScript -->
   </div>
 </section>
 
@@ -1084,7 +1244,7 @@ footer{
 <section id="why" class="cv-auto">
   <div class="why-wrap">
     <div class="why-visual reveal-l">
-      <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=800&q=65&auto=format" alt="Studio" loading="lazy">
+      <img src="section_image/image.png" alt="Studio" loading="lazy">
       <div class="why-badge">
         <span class="big">4.9</span>
         <small>Google Rating</small>
@@ -1152,7 +1312,7 @@ footer{
 </section>
 
 <!-- PROCESS -->
-<section id="process" class="cv-auto">
+<section id="process" class="cv-auto theme-light">
   <div class="reveal" style="text-align:center">
     <span class="lbl">How It Works</span>
     <h2 class="sec-title">Our Design <em>Process</em></h2>
@@ -1242,143 +1402,140 @@ footer{
 </section>
 
 <!-- CTA BAND -->
-<div id="cta-band" class="reveal cv-auto">
+<div id="cta-band" class="reveal cv-auto theme-light">
   <h2>Ready to Transform<br><em style="color:var(--gold);font-style:italic">Your Space?</em></h2>
   <p>Your dream interior is one conversation away.<br>Let's begin with a complimentary design consultation.</p>
   <a href="#contact" class="btn-gold">Book Free Consultation</a>
 </div>
 
-<!-- CONTACT -->
+<!-- CONTACT — PRIVATE CONSULTATION -->
 <section id="contact" class="cv-auto">
-  <div class="reveal">
-    <span class="lbl">Get In Touch</span>
-    <h2 class="sec-title">Begin Your <em>Project</em></h2>
-    <div class="rule"></div>
+  <div class="consult-head reveal">
+    <span class="lbl">Private Consultation</span>
+    <h2 class="sec-title">Begin a <em>Conversation</em></h2>
   </div>
-  <div class="contact-wrap">
-    <div class="reveal-l">
-      <div class="contact-info">
-        <h3>Let's create something extraordinary together.</h3>
-        <p>Whether it's a full home transformation, a single statement room, or a commercial space — our studio is ready to listen, inspire, and deliver.</p>
-      </div>
-      <div class="contact-perks">
-        <div class="perk">
-          <div class="perk-icon">
-            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-          </div>
-          <div class="perk-text">
-            <h5>Free Design Consultation</h5>
-            <p>No commitment. Just an honest conversation about your vision.</p>
-          </div>
-        </div>
-        <div class="perk">
-          <div class="perk-icon">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
-          <div class="perk-text">
-            <h5>Response within 24 Hours</h5>
-            <p>We value your time — every enquiry receives a prompt, thoughtful reply.</p>
-          </div>
-        </div>
-        <div class="perk">
-          <div class="perk-icon">
-            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
-          </div>
-          <div class="perk-text">
-            <h5>Project Discussion Call</h5>
-            <p>A dedicated call to discuss scope, timeline, and possibilities.</p>
-          </div>
-        </div>
-      </div>
-      <div class="contact-details" style="margin-top:40px">
-        <div class="c-item">
-          <div class="c-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
-          <div>
-            <h5>Studio Address</h5>
-            <p>Mangalram Apartments<br>Kilpauk, Chennai, Tamil Nadu 600010</p>
-          </div>
-        </div>
-        <div class="c-item">
-          <div class="c-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
-          </div>
-          <div>
-            <h5>Call Us</h5>
-            <p>098403 29276 / 8610880225<br>Mon–Sat, 10:00am – 6:30pm</p>
-          </div>
-        </div>
-        <div class="c-item">
-          <div class="c-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          </div>
-          <div>
-            <h5>Email</h5>
-            <p>hello@interdesigns.in<br>We respond within 24 hours</p>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="consult-wrap">
 
-    <div class="reveal-r">
-      <div class="contact-form">
-        <div class="f-row">
-          <div class="f-group">
-            <label>Full Name</label>
-            <input type="text" placeholder="Your name">
+    <!-- EDITORIAL ASIDE -->
+    <aside class="consult-aside reveal-l">
+      <div class="consult-trust">
+        <div class="trust-cell">
+          <span class="trust-n">200+</span>
+          <span class="trust-l">Spaces Crafted</span>
+        </div>
+        <div class="trust-cell">
+          <span class="trust-n">4.9</span>
+          <span class="trust-l">Client Rating</span>
+        </div>
+        <div class="trust-cell">
+          <span class="trust-n">24h</span>
+          <span class="trust-l">Personal Reply</span>
+        </div>
+      </div>
+
+      <div class="consult-image">
+        <img src="bottom/Screenshot_2026-06-10_at_10.55.45_AM.png" alt="Architectural interior detail" loading="lazy">
+        <div class="consult-sign">
+          <div class="nm">Sejal</div>
+          <span class="rl">Founder &amp; Principal Designer</span>
+        </div>
+      </div>
+
+      <div class="consult-lines">
+        <div class="cl-item">
+          <span class="k">The Studio</span>
+          <span class="v">Mangalram Apartments, Kilpauk<br>Chennai, Tamil Nadu 600010</span>
+        </div>
+        <div class="cl-item">
+          <span class="k">By Appointment</span>
+          <span class="v">098403 29276 · Mon–Sat, 10:00am – 6:30pm</span>
+        </div>
+        <div class="cl-item">
+          <span class="k">Direct</span>
+          <span class="v">hello@interdesigns.in</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- BOOKING CARD -->
+    <div class="consult-card reveal-r">
+      <span class="step">Request an Appointment</span>
+      <h3>Tell us about your project</h3>
+      <p class="cf-sub">A dedicated design lead will personally guide you from this first message to the final reveal. The more you share, the more tailored our conversation.</p>
+
+      <form class="cf" onsubmit="event.preventDefault();handleSubmit();">
+        <div class="cf-row">
+          <div class="cf-field">
+            <label>Your Name</label>
+            <input type="text" placeholder="Full name" required>
           </div>
-          <div class="f-group">
-            <label>Phone Number</label>
-            <input type="tel" placeholder="+91 98403 29276">
+          <div class="cf-field">
+            <label>Phone</label>
+            <input type="tel" placeholder="+91 00000 00000">
           </div>
         </div>
-        <div class="f-group">
-          <label>Email Address</label>
-          <input type="email" placeholder="your@email.com">
+        <div class="cf-field">
+          <label>Email</label>
+          <input type="email" placeholder="you@email.com" required>
         </div>
-        <div class="f-group">
-          <label>Project Type</label>
-          <select>
-            <option value="">Select project type</option>
-            <option>Residential Home</option>
-            <option>Villa / Luxury Residence</option>
-            <option>Office & Workspace</option>
-            <option>Commercial Space</option>
-            <option>Modular Kitchen</option>
-            <option>Single Room Makeover</option>
-          </select>
-        </div>
-        <div class="f-row">
-          <div class="f-group">
-            <label>Budget Range</label>
+        <div class="cf-row">
+          <div class="cf-field has-arrow">
+            <label>Property Type</label>
+            <select required>
+              <option value="" disabled selected hidden>Select</option>
+              <option>Private Residence</option>
+              <option>Villa / Luxury Home</option>
+              <option>Penthouse / Apartment</option>
+              <option>Office &amp; Workspace</option>
+              <option>Commercial Space</option>
+            </select>
+          </div>
+          <div class="cf-field has-arrow">
+            <label>Design Style</label>
             <select>
-              <option value="">Select budget</option>
-              <option>₹5L – ₹15L</option>
+              <option value="" disabled selected hidden>Select</option>
+              <option>Quiet Luxury / Minimal</option>
+              <option>Contemporary</option>
+              <option>Classic / Timeless</option>
+              <option>Warm Modern</option>
+              <option>Undecided — Guide Me</option>
+            </select>
+          </div>
+        </div>
+        <div class="cf-row">
+          <div class="cf-field has-arrow">
+            <label>Investment</label>
+            <select>
+              <option value="" disabled selected hidden>Select</option>
               <option>₹15L – ₹30L</option>
               <option>₹30L – ₹60L</option>
-              <option>₹60L+</option>
+              <option>₹60L – ₹1Cr</option>
+              <option>₹1Cr+</option>
             </select>
           </div>
-          <div class="f-group">
+          <div class="cf-field has-arrow">
             <label>Timeline</label>
             <select>
-              <option value="">Select timeline</option>
-              <option>Within 1 month</option>
+              <option value="" disabled selected hidden>Select</option>
+              <option>Ready to begin</option>
               <option>1–3 months</option>
               <option>3–6 months</option>
-              <option>6+ months</option>
+              <option>Still exploring</option>
             </select>
           </div>
         </div>
-        <div class="f-group">
-          <label>Tell Us About Your Vision</label>
-          <textarea placeholder="Describe your project, style preferences, or specific requirements..."></textarea>
+        <div class="cf-field">
+          <label>Your Vision</label>
+          <textarea placeholder="Tell us about the space, how you want it to feel, and what matters most to you..."></textarea>
         </div>
-        <button class="f-submit" onclick="handleSubmit()">Send Enquiry &rarr;</button>
-        <p class="f-note">Or reach us instantly on WhatsApp ↘</p>
-      </div>
+        <button type="submit" class="cf-submit">Request Consultation<span class="arr">&#8594;</span></button>
+        <div class="cf-foot">
+          <span>Prefer to speak now?</span>
+          <a href="https://wa.me/918610880225" target="_blank" rel="noopener">Message us on WhatsApp</a>
+        </div>
+      </form>
     </div>
+
   </div>
 </section>
 
@@ -1440,47 +1597,49 @@ footer{
   </svg>
 </a>
 
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.29/dist/lenis.min.js"></script>
 <script>
+/* ── LENIS SMOOTH SCROLL ── */
+if(typeof Lenis !== 'undefined'){
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    direction: 'vertical',
+    gestureDirection: 'vertical',
+    smooth: true,
+    mouseMultiplier: 1,
+    smoothTouch: false,
+    touchMultiplier: 2,
+  });
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+}
+
 /* ── LOADER ── */
 document.getElementById('loader').classList.add('out');
 
-/* ── CURSOR (deferred, desktop only) ── */
-if(window.innerWidth > 768){
-  const cur = document.getElementById('cursor');
-  const ring = document.getElementById('cursor-ring');
-  let mx=0,my=0,rx=0,ry=0;
-  document.addEventListener('mousemove', e => {
-    mx=e.clientX; my=e.clientY;
-    cur.style.left=mx+'px'; cur.style.top=my+'px';
-  },{passive:true});
-  (function animRing(){
-    rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
-    ring.style.left=rx+'px'; ring.style.top=ry+'px';
-    requestAnimationFrame(animRing);
-  })();
-  document.querySelectorAll('a,button,.svc-card,.p-item,.f-btn').forEach(el=>{
-    el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-hover'),{passive:true});
-    el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-hover'),{passive:true});
-  });
-}
 
-/* ── NAV PREMIUM EXPAND/CONTRACT ── */
+/* ── NAV SCROLL BEHAVIOR (hide down / show up) ── */
 const nav = document.getElementById('navbar');
 let lastScroll = 0;
-window.addEventListener('scroll', () => {
+let navTicking = false;
+function updateNav(){
   const current = window.scrollY;
-  if(current > 100){
-    if(current > lastScroll){
-      nav.classList.remove('expanded');
-      nav.classList.add('contracted');
-    }else{
-      nav.classList.remove('contracted');
-      nav.classList.add('expanded');
-    }
+  if(current > 40){ nav.classList.add('nav-solid'); }
+  else{ nav.classList.remove('nav-solid'); }
+  if(current > lastScroll && current > 160){
+    nav.classList.add('nav-hidden');
   }else{
-    nav.classList.remove('expanded','contracted');
+    nav.classList.remove('nav-hidden');
   }
-  lastScroll = current;
+  lastScroll = current < 0 ? 0 : current;
+  navTicking = false;
+}
+window.addEventListener('scroll', () => {
+  if(!navTicking){ window.requestAnimationFrame(updateNav); navTicking = true; }
 },{passive:true});
 
 /* ── HAMBURGER ── */
@@ -1500,14 +1659,6 @@ function closeMob(){ ham.classList.remove('open'); mob.classList.remove('open');
   }, 5000);
 })();
 
-/* ── PORTFOLIO FILTERS ── */
-document.querySelectorAll('.f-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.f-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-  });
-});
-
 /* ── TESTIMONIALS SLIDER ── */
 let tCur=0;
 const tTrack = document.getElementById('tTrack');
@@ -1522,6 +1673,15 @@ document.getElementById('tPrev').addEventListener('click',()=>gotoT(tCur-1));
 document.getElementById('tNext').addEventListener('click',()=>gotoT(tCur+1));
 tDots.forEach((d,i)=>d.addEventListener('click',()=>gotoT(i)));
 setInterval(()=>gotoT(tCur+1), 7000);
+/* touch swipe */
+(function(){
+  let tx=0;
+  tTrack.addEventListener('touchstart',e=>{tx=e.changedTouches[0].clientX},{passive:true});
+  tTrack.addEventListener('touchend',e=>{
+    const dx=e.changedTouches[0].clientX-tx;
+    if(Math.abs(dx)>40){dx<0?gotoT(tCur+1):gotoT(tCur-1);}
+  },{passive:true});
+})();
 
 /* ── REVEAL ON SCROLL ── */
 const observer = new IntersectionObserver(entries=>{
@@ -1531,14 +1691,124 @@ document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el=>observer.ob
 
 /* ── FORM SUBMIT ── */
 function handleSubmit(){
-  const btn = document.querySelector('.f-submit');
-  btn.textContent='Sending…';
+  const btn = document.querySelector('.cf-submit') || document.querySelector('.f-submit');
+  if(!btn) return;
+  btn.innerHTML='Sending…';
   setTimeout(()=>{
-    btn.textContent='✓ Enquiry Received';
+    btn.innerHTML='&#10003; Request Received';
     btn.style.background='#2a6b44';
-    setTimeout(()=>{ btn.textContent='Send Enquiry →'; btn.style.background=''; },4000);
+    btn.style.color='#fff';
+    setTimeout(()=>{ btn.innerHTML='Request Consultation<span class="arr">&#8594;</span>'; btn.style.background=''; btn.style.color=''; },4500);
   },1200);
 }
+
+/* ── DYNAMIC PORTFOLIO GALLERY ── */
+const portfolioData = {
+  residential: [
+    { src: 'residential/image.png', title: 'Residential Project 01', location: 'Chennai', type: 'Residential', year: '2024' },
+    { src: 'residential/image2.png', title: 'Residential Project 02', location: 'Chennai', type: 'Residential', year: '2024' },
+    { src: 'residential/image3.png', title: 'Residential Project 03', location: 'Chennai', type: 'Residential', year: '2024' },
+    { src: 'residential/image4.png', title: 'Residential Project 04', location: 'Chennai', type: 'Residential', year: '2024' }
+  ],
+  commercial: [
+    { src: 'commercial/Screenshot_2026-06-10_at_10.55.45_AM.png', title: 'Commercial Project 01', location: 'Chennai', type: 'Commercial', year: '2024' },
+    { src: 'commercial/Screenshot_2026-06-10_at_10.56.30_AM.png', title: 'Commercial Project 02', location: 'Chennai', type: 'Commercial', year: '2024' },
+    { src: 'commercial/Screenshot_2026-06-10_at_10.56.50_AM.png', title: 'Commercial Project 03', location: 'Chennai', type: 'Commercial', year: '2024' },
+    { src: 'commercial/Screenshot_2026-06-10_at_10.57.05_AM.png', title: 'Commercial Project 04', location: 'Chennai', type: 'Commercial', year: '2024' }
+  ],
+  offices: [
+    { src: 'offices/office1.png', title: 'Office Project 01', location: 'Chennai', type: 'Office', year: '2024' },
+    { src: 'offices/office2.png', title: 'Office Project 02', location: 'Chennai', type: 'Office', year: '2024' },
+    { src: 'offices/office3.png', title: 'Office Project 03', location: 'Chennai', type: 'Office', year: '2024' },
+    { src: 'offices/office4.png', title: 'Office Project 04', location: 'Chennai', type: 'Office', year: '2024' }
+  ],
+  villas: [
+    { src: 'villlas/villa1.png', title: 'Villa Project 01', location: 'Chennai', type: 'Villa', year: '2024' },
+    { src: 'villlas/villa2.png', title: 'Villa Project 02', location: 'Chennai', type: 'Villa', year: '2024' },
+    { src: 'villlas/Screenshot_2026-06-10_at_11.00.46_AM.png', title: 'Villa Project 03', location: 'Chennai', type: 'Villa', year: '2024' },
+    { src: 'villlas/Screenshot_2026-06-10_at_11.01.08_AM.png', title: 'Villa Project 04', location: 'Chennai', type: 'Villa', year: '2024' }
+  ]
+};
+
+const grid = document.getElementById('portfolioGrid');
+const filterBtns = document.querySelectorAll('.f-btn[data-filter]');
+let currentFilter = 'all';
+
+function createCard(project, index) {
+  const card = document.createElement('div');
+  card.className = 'p-item';
+  card.innerHTML = `
+    <div class="p-skeleton"></div>
+    <img src="${project.src}" alt="${project.title}" loading="lazy">
+    <div class="p-overlay">
+      <div class="p-info">
+        <div class="p-title">${project.title}</div>
+        <div class="p-meta">
+          <span>${project.location}</span><span class="sep">·</span>
+          <span>${project.type}</span><span class="sep">·</span>
+          <span>${project.year}</span>
+        </div>
+      </div>
+    </div>
+  `;
+  
+  const img = card.querySelector('img');
+  const skeleton = card.querySelector('.p-skeleton');
+  
+  img.onload = () => {
+    img.classList.add('loaded');
+    skeleton.style.display = 'none';
+  };
+  
+  return card;
+}
+
+function renderProjects(filter) {
+  grid.innerHTML = '';
+  let projects = [];
+  
+  if (filter === 'all') {
+    Object.values(portfolioData).forEach(category => {
+      if (category.length > 0) projects.push(category[0]);
+    });
+  } else {
+    projects = portfolioData[filter] || [];
+  }
+  
+  if (projects.length === 0) {
+    grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--muted);padding:60px;">No projects found.</p>';
+    return;
+  }
+  
+  projects.forEach((project, index) => {
+    const card = createCard(project, index);
+    grid.appendChild(card);
+    
+    setTimeout(() => {
+      card.classList.add('visible');
+    }, index * 80);
+  });
+}
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    
+    const cards = grid.querySelectorAll('.p-item');
+    cards.forEach(card => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(24px)';
+    });
+    
+    setTimeout(() => {
+      renderProjects(currentFilter);
+    }, 300);
+  });
+});
+
+renderProjects('all');
 </script>
 </body>
 </html>

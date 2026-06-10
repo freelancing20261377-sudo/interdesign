@@ -1,266 +1,381 @@
-# ULTRA PREMIUM LUXURY REDESIGN PROMPT
+You are a Creative Director, Luxury Brand Strategist, Award-Winning UX Designer, and Senior Frontend Architect.
 
-Transform the existing website into a world-class luxury interior design website comparable to the digital experience of Studio MK27, Kelly Wearstler, Yabu Pushelberg, Armani Casa, and top international architecture firms.
+Your task is to redesign this interior design website to feel like a $20,000-$50,000 custom website built by a premium digital agency for a luxury interior design studio.
 
-Do not redesign it like a generic interior website.
+Current website problems:
 
-The goal is to make visitors instantly feel they are dealing with a premium design studio handling multi-lakh and luxury residential projects.
+- Feels template-driven.
+- Too much black section after black section.
+- Typography hierarchy is inconsistent.
+- Hero lacks emotional impact.
+- Images feel like stock photos rather than curated editorial photography.
+- Service cards look generic.
+- Portfolio section lacks storytelling.
+- Visual rhythm is repetitive.
+- Luxury perception is lower than intended.
+- Not enough whitespace.
+- Doesn't create desire or aspiration.
+- Doesn't feel comparable to top architecture and interior design firms.
 
----
+Reference level:
 
-## VISUAL DIRECTION
+- Studio McGee
+- Kelly Wearstler
+- Yabu Pushelberg
+- Olson Kundig
+- Romanek Design Studio
+- Design Anthology
+- Elle Decor
+- Architectural Digest
 
-Use:
+GOAL
 
-- Editorial layouts
-- Luxury typography
-- Architectural composition
-- High-end hospitality aesthetics
-- Premium whitespace
-- Sophisticated image presentation
-- Minimal but impactful animations
+The website must feel:
 
-Avoid:
-
-- Template website appearance
-- Generic agency layouts
-- Cheap gradients
-- Excessive shadows
-- Cartoon icons
-- Emoji icons
-- Overly colorful elements
-
----
-
-## HERO SECTION
-
-Completely elevate the hero experience.
-
-Requirements:
-
-- Full-screen cinematic hero
-- High-resolution luxury project photography
-- Dark luxury overlay
-- Elegant typography hierarchy
-- Strong visual storytelling
-
-Headline example:
-
-Designing Timeless Spaces
-for Modern Living
-
-Subheadline:
-
-Luxury residential, commercial and villa interiors crafted with exceptional attention to detail.
-
-Remove anything that feels generic or sales-focused.
-
-Make the hero feel like a luxury magazine cover.
-
----
-
-## TYPOGRAPHY
-
-Create a premium editorial typography system.
-
-Headings:
-
-- Large
-- Elegant
+- Bespoke
+- Editorial
 - Sophisticated
-- High contrast
+- Quiet luxury
+- Expensive
+- Architectural
+- Museum-quality
+- Timeless
+- International
+- Not template-based
 
-Body text:
+------------------------------------------------
 
-- Refined
-- Spacious
-- Easy to read
+OVERALL DESIGN DIRECTION
 
-Improve spacing between:
+Move away from:
 
-- Headings
-- Paragraphs
-- Sections
+- Generic agency layouts
+- Repeated card grids
+- Standard landing page structure
+- Heavy dependence on dark blocks
 
-Typography should become a key design feature.
+Move toward:
 
----
-
-## NAVIGATION
-
-Upgrade the navigation to luxury standards.
-
-Requirements:
-
-- Glass effect
-- Blur background
-- Thin borders
-- Smooth transitions
-- Premium hover states
-
-Navigation should feel expensive and refined.
-
----
-
-## ABOUT SECTION
-
-Replace generic layout with a luxury editorial layout.
-
-Use:
-
+- Editorial storytelling
+- Magazine-inspired layouts
 - Large photography
-- Asymmetrical composition
-- Premium spacing
-- Elegant statistics presentation
+- Elegant asymmetry
+- Architectural whitespace
+- Premium motion design
 
-Add subtle storytelling feel.
+The experience should feel curated rather than assembled.
 
----
+------------------------------------------------
 
-## SERVICES SECTION
+NAVIGATION
 
-Replace emoji icons completely.
+Current navbar is too large and visually heavy.
 
-Use:
+Redesign:
 
-- Elegant line icons
-- Architectural icons
-- Premium visual system
+- Height 72px
+- Ultra subtle glass effect
+- Slight navy tint
+- More transparency
+- Smaller CTA
 
-Cards should feel like luxury service showcases.
+Introduce:
 
-Add stronger hover interactions.
+- Elegant hover states
+- Smooth transitions
+- Refined micro-interactions
 
----
+Navigation should disappear on scroll down and reappear on scroll up.
 
-## PORTFOLIO SECTION
+------------------------------------------------
 
-This should become the strongest section on the website.
+HERO SECTION
+
+Completely redesign.
+
+Current issue:
+
+The left-aligned giant typography feels predictable.
+
+Create a cinematic luxury hero.
 
 Requirements:
 
-- Luxury masonry gallery
-- Larger project imagery
-- Editorial grid system
-- Premium hover effects
-- Smooth image transitions
+Option A:
+Large full-screen video showcasing completed projects.
 
-Every project should feel like a luxury case study.
+Option B:
+Editorial image slider with smooth transitions.
+
+Hero layout:
+
+Small luxury eyebrow text
+
+Large statement:
+
+"Designing Spaces That Endure"
+
+or
+
+"Timeless Interiors Crafted For Modern Living"
+
+Supporting copy:
+
+2 lines maximum.
+
+Single premium CTA.
+
+Avoid multiple competing buttons.
 
 Add:
 
-- Project location
-- Project category
-- Project size
-- Completion year
+- Subtle parallax
+- Elegant reveal animations
+- Cinematic transitions
 
----
+The hero must create an emotional response.
 
-## WHY CHOOSE US
+------------------------------------------------
 
-Transform into premium value proposition section.
+ABOUT SECTION
 
-Use:
+Current section feels corporate.
 
-- Elegant cards
-- Refined icons
-- Better spacing
-- Luxury trust indicators
+Transform into:
 
-Remove generic visual treatment.
-
----
-
-## TESTIMONIALS
-
-Make testimonials feel premium.
+A founder story experience.
 
 Use:
 
-- Larger typography
-- Editorial quotes
-- Premium card styling
-- Better spacing
-- Elegant review presentation
+- Large portrait of founder
+- Signature
+- Philosophy statement
+- Storytelling layout
 
-Should resemble luxury hospitality websites.
+Focus on:
 
----
+Craftsmanship.
+Personalization.
+Design philosophy.
 
-## CONTACT SECTION
+Not statistics.
 
-Upgrade to luxury consultation experience.
+Move project count lower on page.
+
+------------------------------------------------
+
+SERVICES SECTION
+
+Current cards feel generic.
+
+Replace with:
+
+Editorial service showcase.
+
+Each service should feel like a luxury offering.
+
+Examples:
+
+Residential Interiors
+
+Large photography.
+Rich description.
+Hover interactions.
+
+Avoid card-grid appearance.
+
+Create visual variety.
+
+------------------------------------------------
+
+PORTFOLIO SECTION
+
+Current portfolio feels like image blocks.
+
+Redesign as:
+
+Luxury case studies.
+
+Each project should include:
+
+- Project name
+- Location
+- Area
+- Scope
+- Photography
+- Story
+
+Large immersive layouts.
+
+Magazine style.
+
+Use alternating compositions.
+
+Make visitors want to explore projects.
+
+------------------------------------------------
+
+VISUAL SYSTEM
+
+Typography:
+
+Luxury serif:
+Canela
+Cormorant Garamond
+Ivy Mode
+Saol Display
+
+Body:
+Inter
+Neue Haas Grotesk
+Suisse Intl
+
+Rules:
+
+- More whitespace
+- Larger margins
+- Better rhythm
+- Better contrast hierarchy
+
+------------------------------------------------
+
+COLORS
+
+Current palette is too dark.
+
+Introduce:
+
+Warm Ivory
+Deep Charcoal
+Soft Navy
+Muted Gold
+
+Luxury palette:
+
+#F8F5F0
+#0F1115
+#1B2234
+#C7A86D
+
+Avoid excessive pure black.
+
+------------------------------------------------
+
+IMAGERY
+
+Current imagery feels stock-photo driven.
+
+Replace with:
+
+Editorial photography.
 
 Requirements:
 
-- Premium form design
-- Better field styling
-- Improved spacing
-- Luxury consultation presentation
+- Architectural lighting
+- Premium materials
+- Natural shadows
+- High-end compositions
+- Consistent color grading
+
+Every image should feel published in Architectural Digest.
+
+------------------------------------------------
+
+ANIMATIONS
+
+Add sophisticated motion:
+
+- Image reveal masks
+- Smooth scrolling
+- Text fade sequences
+- Parallax layers
+- Hover transformations
+- Section transitions
+
+Avoid flashy animations.
+
+Luxury websites move slowly and confidently.
+
+------------------------------------------------
+
+SOCIAL PROOF
+
+Current testimonials feel weak.
+
+Replace with:
+
+Luxury testimonial experience.
+
+Use:
+
+- Client portrait
+- Project image
+- Story format
+
+Create credibility through narrative.
+
+------------------------------------------------
+
+CONTACT SECTION
+
+Current form feels basic.
+
+Redesign:
+
+Luxury consultation booking experience.
+
+Include:
+
+Project budget
+Property type
+Timeline
+Design style
+
+Make it feel like onboarding for a premium service.
+
+------------------------------------------------
+
+FOOTER
+
+Current footer feels unfinished.
+
+Create:
+
+Large luxury footer.
+
+Include:
+
+Studio statement.
+Services.
+Projects.
+Contact.
+Social.
+
+Add elegant spacing.
+
+Make footer feel like a final brand experience.
+
+------------------------------------------------
+
+PREMIUM DETAILS
 
 Add:
 
-Free Design Consultation
+- Custom cursor interactions
+- Scroll progress indicator
+- Image zoom effects
+- Architectural grid system
+- Premium loading screen
+- Elegant transitions
 
-Response within 24 Hours
+Every detail should communicate craftsmanship.
 
-Project Discussion Call
+------------------------------------------------
 
----
+FINAL OBJECTIVE
 
-## MICRO INTERACTIONS
+When visitors land on the website they should immediately believe:
 
-Add:
+"This studio handles multi-million-dollar homes and delivers world-class design."
 
-- Smooth fade reveals
-- Elegant image zoom
-- Luxury hover animations
-- Refined transitions
-- Smooth section entrances
-
-Avoid flashy effects.
-
-Everything should feel subtle and premium.
-
----
-
-## IMAGE PRESENTATION
-
-Make photography the centerpiece.
-
-Requirements:
-
-- Larger images
-- Better cropping
-- Cinematic composition
-- Magazine-style presentation
-
-Images should dominate the experience.
-
----
-
-## MOBILE EXPERIENCE
-
-Redesign every section for luxury mobile experience.
-
-Requirements:
-
-- Better spacing
-- Improved typography scale
-- Larger touch targets
-- Faster interactions
-- Premium mobile layouts
-
-Should feel like a luxury mobile app.
-
----
-
-## FINAL GOAL
-
-The website should no longer feel like a ₹5,000–₹10,000 interior design website.
-
-It should feel like a ₹20 lakh+ interior design studio brand website capable of competing with top luxury interior firms globally.
-
-The final experience should communicate:
-
-"Exceptional design, premium craftsmanship, and architectural excellence."
+The website should feel like an award-winning luxury architecture and interior design experience, not a premium template.
