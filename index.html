@@ -624,14 +624,9 @@ section{padding:150px 7%}
 ───────────────────────────────────────── */
 #process{background:var(--surface);text-align:center}
 .process-steps{
-  display:flex;gap:0;margin-top:64px;position:relative;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:40px 32px;margin-top:64px;position:relative;
 }
-.process-steps::before{
-  content:'';position:absolute;
-  top:30px;left:8%;right:8%;height:1px;
-  background:linear-gradient(to right,transparent,var(--line) 20%,var(--line) 80%,transparent);
-}
-.p-step{flex:1;padding:0 16px;position:relative}
+.p-step{padding:0 8px;position:relative}
 .p-step-num{
   width:60px;height:60px;border:1px solid var(--line);border-radius:50%;
   display:flex;align-items:center;justify-content:center;
@@ -646,6 +641,29 @@ section{padding:150px 7%}
   font-size:1rem;font-weight:500;margin-bottom:10px;
 }
 .p-step-desc{font-size:0.78rem;color:var(--muted);line-height:1.8;font-weight:300}
+
+/* ─────────────────────────────────────────
+   DESIGN STAGE
+───────────────────────────────────────── */
+#design-stage{background:var(--surface);text-align:center}
+.design-steps{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:40px 32px;margin-top:64px;position:relative;
+}
+.d-step{padding:0 8px;position:relative}
+.d-step-num{
+  width:60px;height:60px;border:1px solid var(--line);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 20px;
+  font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--gold);
+  background:var(--surface);position:relative;z-index:1;
+  transition:all 0.35s;
+}
+.d-step:hover .d-step-num{background:var(--gold);color:var(--black);border-color:var(--gold)}
+.d-step-title{
+  font-family:'Playfair Display',serif;
+  font-size:1rem;font-weight:500;margin-bottom:10px;
+}
+.d-step-desc{font-size:0.78rem;color:var(--muted);line-height:1.8;font-weight:300}
 
 /* ─────────────────────────────────────────
    TESTIMONIALS
@@ -1024,8 +1042,10 @@ footer{
   .why-badge{width:110px;height:110px;bottom:-20px;right:0}
 
   /* PROCESS */
-  .process-steps{flex-direction:column;gap:32px}
-  .process-steps::before{display:none}
+  .process-steps{grid-template-columns:1fr;gap:32px}
+
+  /* DESIGN STAGE */
+  .design-steps{grid-template-columns:1fr;gap:32px}
 
   /* TESTIMONIALS */
   .testi-card{padding:32px 24px}
@@ -1337,28 +1357,101 @@ footer{
   <div class="process-steps">
     <div class="p-step reveal delay-1">
       <div class="p-step-num">01</div>
-      <h4 class="p-step-title">Consultation</h4>
-      <p class="p-step-desc">A detailed discovery session to understand your vision, spatial requirements, and project scope.</p>
+      <h4 class="p-step-title">Initial Meeting</h4>
+      <p class="p-step-desc">Understand customer requirements and expectations. Discuss project scope and budget.</p>
     </div>
     <div class="p-step reveal delay-2">
       <div class="p-step-num">02</div>
-      <h4 class="p-step-title">Concept & 3D Design</h4>
-      <p class="p-step-desc">Bespoke mood boards and photorealistic renders crafted for your review and approval.</p>
+      <h4 class="p-step-title">Customer Enquiry</h4>
+      <p class="p-step-desc">Receive enquiry through call, message, referral, or visit. Gather basic project details.</p>
     </div>
     <div class="p-step reveal delay-3">
       <div class="p-step-num">03</div>
-      <h4 class="p-step-title">Material Selection</h4>
-      <p class="p-step-desc">Curated palettes, premium furniture, and fixtures handpicked from trusted global sources.</p>
+      <h4 class="p-step-title">Appointment Scheduling</h4>
+      <p class="p-step-desc">Fix a convenient date and time for site visit or consultation.</p>
     </div>
     <div class="p-step reveal delay-4">
       <div class="p-step-num">04</div>
-      <h4 class="p-step-title">Execution</h4>
-      <p class="p-step-desc">Expert craftsmen execute every element with precision, supervised end-to-end by your design manager.</p>
+      <h4 class="p-step-title">Space Layout Discussion</h4>
+      <p class="p-step-desc">Measure and analyze the available space. Discuss functional requirements and space planning.</p>
     </div>
     <div class="p-step reveal delay-5">
       <div class="p-step-num">05</div>
-      <h4 class="p-step-title">Handover</h4>
-      <p class="p-step-desc">A final walk-through to confirm every detail is perfect before your dream space is revealed.</p>
+      <h4 class="p-step-title">Design Concept Discussion</h4>
+      <p class="p-step-desc">Share general design ideas, themes, materials, and finishes. Understand the customer's style preferences.</p>
+    </div>
+    <div class="p-step reveal delay-1">
+      <div class="p-step-num">06</div>
+      <h4 class="p-step-title">Estimated Quote Presentation</h4>
+      <p class="p-step-desc">Present a preliminary cost estimate based on requirements. Explain the scope of work included.</p>
+    </div>
+    <div class="p-step reveal delay-2">
+      <div class="p-step-num">07</div>
+      <h4 class="p-step-title">Proposal Finalization</h4>
+      <p class="p-step-desc">Freeze the design concept, scope, and commercial terms. Confirm timelines and deliverables.</p>
+    </div>
+    <div class="p-step reveal delay-3">
+      <div class="p-step-num">08</div>
+      <h4 class="p-step-title">Advance Payment</h4>
+      <p class="p-step-desc">Collect 10% advance payment to initiate the design process.</p>
+    </div>
+  </div>
+</section>
+
+<div class="gold-line"></div>
+
+<!-- DESIGN STAGE -->
+<section id="design-stage" class="cv-auto theme-light">
+  <div class="reveal" style="text-align:center">
+    <span class="lbl">Design Phase</span>
+    <h2 class="sec-title">Design <em>Stage</em></h2>
+    <div class="rule rule-center"></div>
+  </div>
+  <div class="design-steps">
+    <div class="d-step reveal delay-1">
+      <div class="d-step-num">01</div>
+      <h4 class="d-step-title">Site Measurement</h4>
+      <p class="d-step-desc">Accurate measurements taken at the project site.</p>
+    </div>
+    <div class="d-step reveal delay-2">
+      <div class="d-step-num">02</div>
+      <h4 class="d-step-title">Requirement Analysis</h4>
+      <p class="d-step-desc">Detailed discussion to understand functional and design requirements.</p>
+    </div>
+    <div class="d-step reveal delay-3">
+      <div class="d-step-num">03</div>
+      <h4 class="d-step-title">Concept Development</h4>
+      <p class="d-step-desc">Creation of design concepts based on client preferences and lifestyle.</p>
+    </div>
+    <div class="d-step reveal delay-4">
+      <div class="d-step-num">04</div>
+      <h4 class="d-step-title">Space Planning</h4>
+      <p class="d-step-desc">Detailed layout planning for optimum space utilization.</p>
+    </div>
+    <div class="d-step reveal delay-5">
+      <div class="d-step-num">05</div>
+      <h4 class="d-step-title">3D Design Presentation</h4>
+      <p class="d-step-desc">Presentation of realistic 3D views for better visualization.</p>
+    </div>
+    <div class="d-step reveal delay-1">
+      <div class="d-step-num">06</div>
+      <h4 class="d-step-title">Detailed Quotation</h4>
+      <p class="d-step-desc">Preparation of a comprehensive quotation based on finalized designs and materials.</p>
+    </div>
+    <div class="d-step reveal delay-2">
+      <div class="d-step-num">07</div>
+      <h4 class="d-step-title">Design Finalization</h4>
+      <p class="d-step-desc">Freeze designs, materials, finishes, and scope of work.</p>
+    </div>
+    <div class="d-step reveal delay-3">
+      <div class="d-step-num">08</div>
+      <h4 class="d-step-title">Working Drawings</h4>
+      <p class="d-step-desc">Preparation of detailed 2D drawings for execution.</p>
+    </div>
+    <div class="d-step reveal delay-4">
+      <div class="d-step-num">09</div>
+      <h4 class="d-step-title">Payment Milestone</h4>
+      <p class="d-step-desc">40% payment upon approval of designs and drawings.</p>
     </div>
   </div>
 </section>
