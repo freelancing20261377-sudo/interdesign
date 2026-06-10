@@ -10,7 +10,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@200;300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap&font-display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@200;300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet"></noscript>
-<link rel="preload" href="images/frame_0001.webp" as="image">
 <style>
 /* ─────────────────────────────────────────
    ROOT TOKENS
@@ -154,35 +153,24 @@ nav.scrolled{
 .mobile-menu a:hover{color:var(--gold)}
 
 /* ─────────────────────────────────────────
-   HERO - SCROLL FRAME ANIMATION
+   HERO - BACKGROUND SLIDESHOW
 ───────────────────────────────────────── */
 #hero{
   position:relative;
-  height:300vh;
+  height:100vh;
   margin:0;
   padding:0;
-}
-.hero-sticky{
-  position:sticky;
-  top:0;
-  left:0;
-  width:100vw;
-  height:100vh;
   overflow:hidden;
-  background:#080808 url('images/frame_0001.webp') center/cover no-repeat;
-  margin:0;
-  padding:0;
 }
-#heroCanvas{
+.hero-bg{
   position:absolute;
-  top:0;left:0;
-  width:100vw;
-  height:100vh;
-  display:block;
+  inset:0;
+  background-size:cover;
+  background-position:center;
   opacity:0;
-  transition:opacity 0.4s;
+  transition:opacity 1.2s ease-in-out;
 }
-#heroCanvas.ready{opacity:1;}
+.hero-bg.active{opacity:1;}
 .hero-overlay{
   position:absolute;inset:0;
   background:linear-gradient(to right,rgba(0,0,0,0.72) 0%,rgba(0,0,0,0.3) 55%,rgba(0,0,0,0.52) 100%);
@@ -263,6 +251,7 @@ nav.scrolled{
    SHARED UTILITIES
 ───────────────────────────────────────── */
 section{padding:110px 6%}
+.cv-auto{content-visibility:auto;contain-intrinsic-size: 1000px}
 .lbl{
   font-size:0.6rem;letter-spacing:0.5em;text-transform:uppercase;
   color:var(--gold);font-weight:300;margin-bottom:14px;display:block;
@@ -827,29 +816,30 @@ footer{
   <a href="#contact" onclick="closeMob()">Enquire</a>
 </div>
 
-<!-- HERO - SCROLL FRAME ANIMATION -->
+<!-- HERO - BACKGROUND SLIDESHOW -->
 <section id="hero">
-  <div class="hero-sticky">
-    <canvas id="heroCanvas"></canvas>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <div class="hero-tag">Interior Design Studio · Chennai</div>
-      <h1 class="hero-h1">Designing Timeless Spaces<br>for <em>Modern Living</em></h1>
-      <p class="hero-sub">Luxury residential, commercial and villa interiors crafted with exceptional attention to detail.</p>
-      <div class="hero-actions">
-        <a href="#contact" class="btn-gold">Begin Your Project</a>
-        <a href="#portfolio" class="btn-ghost">View Portfolio</a>
-      </div>
+  <div class="hero-bg active" style="background-image:url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1920&q=80&auto=format')"></div>
+  <div class="hero-bg" style="background-image:url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1920&q=80&auto=format')"></div>
+  <div class="hero-bg" style="background-image:url('https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1920&q=80&auto=format')"></div>
+  <div class="hero-bg" style="background-image:url('https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=1920&q=80&auto=format')"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Interior Design Studio · Chennai</div>
+    <h1 class="hero-h1">Designing Timeless Spaces<br>for <em>Modern Living</em></h1>
+    <p class="hero-sub">Luxury residential, commercial and villa interiors crafted with exceptional attention to detail.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-gold">Begin Your Project</a>
+      <a href="#portfolio" class="btn-ghost">View Portfolio</a>
     </div>
-    <div class="hero-scroll-hint">
-      <div class="scroll-bar"></div>
-      <span>Scroll</span>
-    </div>
+  </div>
+  <div class="hero-scroll-hint">
+    <div class="scroll-bar"></div>
+    <span>Scroll</span>
   </div>
 </section>
 
 <!-- ABOUT -->
-<section id="about">
+<section id="about" class="cv-auto">
   <div class="about-wrap">
     <div class="about-visual reveal-l">
       <img class="about-img-primary" src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=70&auto=format" alt="Studio interior">
@@ -886,7 +876,7 @@ footer{
 <div class="gold-line"></div>
 
 <!-- SERVICES -->
-<section id="services">
+<section id="services" class="cv-auto">
   <div class="services-header">
     <div class="reveal">
       <span class="lbl">What We Do</span>
@@ -973,7 +963,7 @@ footer{
 <div class="gold-line"></div>
 
 <!-- PORTFOLIO -->
-<section id="portfolio">
+<section id="portfolio" class="cv-auto">
   <div class="portfolio-top reveal">
     <div>
       <span class="lbl">Selected Work</span>
@@ -1085,7 +1075,7 @@ footer{
 <div class="gold-line"></div>
 
 <!-- WHY US -->
-<section id="why">
+<section id="why" class="cv-auto">
   <div class="why-wrap">
     <div class="why-visual reveal-l">
       <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=800&q=65&auto=format" alt="Studio" loading="lazy">
@@ -1156,7 +1146,7 @@ footer{
 </section>
 
 <!-- PROCESS -->
-<section id="process">
+<section id="process" class="cv-auto">
   <div class="reveal" style="text-align:center">
     <span class="lbl">How It Works</span>
     <h2 class="sec-title">Our Design <em>Process</em></h2>
@@ -1194,7 +1184,7 @@ footer{
 <div class="gold-line"></div>
 
 <!-- TESTIMONIALS -->
-<section id="testimonials">
+<section id="testimonials" class="cv-auto">
   <div class="reveal" style="text-align:center">
     <span class="lbl">Client Stories</span>
     <h2 class="sec-title">Voices of <em>Satisfaction</em></h2>
@@ -1246,14 +1236,14 @@ footer{
 </section>
 
 <!-- CTA BAND -->
-<div id="cta-band" class="reveal">
+<div id="cta-band" class="reveal cv-auto">
   <h2>Ready to Transform<br><em style="color:var(--gold);font-style:italic">Your Space?</em></h2>
   <p>Your dream interior is one conversation away.<br>Let's begin with a complimentary design consultation.</p>
   <a href="#contact" class="btn-gold">Book Free Consultation</a>
 </div>
 
 <!-- CONTACT -->
-<section id="contact">
+<section id="contact" class="cv-auto">
   <div class="reveal">
     <span class="lbl">Get In Touch</span>
     <h2 class="sec-title">Begin Your <em>Project</em></h2>
@@ -1478,77 +1468,15 @@ const mob = document.getElementById('mobileMenu');
 ham.addEventListener('click', () => { ham.classList.toggle('open'); mob.classList.toggle('open'); });
 function closeMob(){ ham.classList.remove('open'); mob.classList.remove('open'); }
 
-/* ── HERO SCROLL FRAME ANIMATION (Canvas, lazy-load) ── */
+/* ── HERO SLIDESHOW ── */
 (function(){
-  const canvas = document.getElementById('heroCanvas');
-  const ctx = canvas.getContext('2d');
-  const totalFrames = 121;
-  const images = new Array(totalFrames).fill(null);
-  let currentFrame = 0;
-  let loadingQueue = false;
-
-  function setSize(){
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    drawFrame(currentFrame);
-  }
-  window.addEventListener('resize', setSize, {passive:true});
-  setSize();
-
-  function drawFrame(i){
-    const img = images[i];
-    if(!img || !img.complete || !img.naturalWidth) return;
-    const cw=canvas.width, ch=canvas.height;
-    const iw=img.naturalWidth, ih=img.naturalHeight;
-    const scale=Math.max(cw/iw, ch/ih);
-    const dw=iw*scale, dh=ih*scale;
-    ctx.drawImage(img,(cw-dw)/2,(ch-dh)/2,dw,dh);
-  }
-
-  function loadFrame(i, cb){
-    if(images[i]){ if(cb) cb(); return; }
-    const img = new Image();
-    const num = String(i+1).padStart(4,'0');
-    img.onload = ()=>{ images[i]=img; if(cb) cb(); };
-    img.onerror = ()=>{ images[i]=img; };
-    img.src = `images/frame_${num}.webp`;
-    images[i] = img;
-  }
-
-  /* Load first frame immediately */
-  loadFrame(0, ()=>{ drawFrame(0); canvas.classList.add('ready'); });
-
-  /* Lazy load rest after page is interactive, batched */
-  function loadBatch(start, end){
-    for(let i=start; i<end && i<totalFrames; i++) loadFrame(i);
-  }
-
-  const lazyLoad = typeof requestIdleCallback==='function' ? requestIdleCallback : setTimeout;
-  window.addEventListener('load', ()=>{
-    lazyLoad(()=> loadBatch(1, 20));
-    setTimeout(()=> lazyLoad(()=> loadBatch(20, 60)), 1500);
-    setTimeout(()=> lazyLoad(()=> loadBatch(60, 121)), 3000);
-  });
-
-  /* Scroll handler */
-  let ticking = false;
-  window.addEventListener('scroll', ()=>{
-    if(ticking) return;
-    ticking = true;
-    requestAnimationFrame(()=>{
-      const hero = document.getElementById('hero');
-      const rect = hero.getBoundingClientRect();
-      const progress = Math.max(0, Math.min(1, -rect.top / (hero.offsetHeight - window.innerHeight)));
-      const idx = Math.min(totalFrames-1, Math.floor(progress * totalFrames));
-      if(idx !== currentFrame){
-        currentFrame = idx;
-        if(images[idx] && images[idx].complete && images[idx].naturalWidth){
-          drawFrame(idx);
-        }
-      }
-      ticking = false;
-    });
-  },{passive:true});
+  const bgs = document.querySelectorAll('.hero-bg');
+  let idx = 0;
+  setInterval(()=>{
+    bgs[idx].classList.remove('active');
+    idx = (idx + 1) % bgs.length;
+    bgs[idx].classList.add('active');
+  }, 5000);
 })();
 
 /* ── PORTFOLIO FILTERS ── */
