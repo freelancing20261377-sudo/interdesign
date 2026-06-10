@@ -289,6 +289,8 @@ ACCESSIBILITY
 
 --------------------------------------------------
 FINAL REQUIREMENT
+
+
 --------------------------------------------------
 
 Audit every section of the website and make it feel like a premium luxury interior design website built specifically for mobile devices.
