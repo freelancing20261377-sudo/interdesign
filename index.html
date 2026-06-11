@@ -631,8 +631,8 @@ section{padding:150px 7%}
   width:60px;height:60px;border:1px solid var(--line);border-radius:50%;
   display:flex;align-items:center;justify-content:center;
   margin:0 auto 20px;
-  font-family:'Playfair Display',serif;font-size:1.1rem;color:#FFFFFF;
-  background:var(--surface);position:relative;z-index:1;
+  font-family:'Playfair Display',serif;font-size:1.1rem;color:#1F2430;
+  background:#C8A76A;position:relative;z-index:1;
   transition:all 0.35s;
 }
 .p-step:hover .p-step-num{background:var(--gold);color:var(--black);border-color:var(--gold)}
@@ -654,8 +654,8 @@ section{padding:150px 7%}
   width:60px;height:60px;border:1px solid var(--line);border-radius:50%;
   display:flex;align-items:center;justify-content:center;
   margin:0 auto 20px;
-  font-family:'Playfair Display',serif;font-size:1.1rem;color:#FFFFFF;
-  background:var(--surface);position:relative;z-index:1;
+  font-family:'Playfair Display',serif;font-size:1.1rem;color:#1F2430;
+  background:#C8A76A;position:relative;z-index:1;
   transition:all 0.35s;
 }
 .d-step:hover .d-step-num{background:var(--gold);color:var(--black);border-color:var(--gold)}
@@ -677,8 +677,8 @@ section{padding:150px 7%}
   width:60px;height:60px;border:1px solid var(--line);border-radius:50%;
   display:flex;align-items:center;justify-content:center;
   margin:0 auto 20px;
-  font-family:'Playfair Display',serif;font-size:1.1rem;color:#FFFFFF;
-  background:var(--surface);position:relative;z-index:1;
+  font-family:'Playfair Display',serif;font-size:1.1rem;color:#1F2430;
+  background:#C8A76A;position:relative;z-index:1;
   transition:all 0.35s;
 }
 .e-step:hover .e-step-num{background:var(--gold);color:var(--black);border-color:var(--gold)}
@@ -687,6 +687,29 @@ section{padding:150px 7%}
   font-size:1rem;font-weight:500;margin-bottom:10px;
 }
 .e-step-desc{font-size:0.78rem;color:var(--muted);line-height:1.8;font-weight:300}
+
+/* ─────────────────────────────────────────
+   HANDOVER STAGE
+───────────────────────────────────────── */
+#handover-stage{background:var(--surface);text-align:center}
+.handover-steps{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:40px 32px;margin-top:64px;position:relative;
+}
+.h-step{padding:0 8px;position:relative}
+.h-step-num{
+  width:60px;height:60px;border:1px solid var(--line);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 20px;
+  font-family:'Playfair Display',serif;font-size:1.1rem;color:#1F2430;
+  background:#C8A76A;position:relative;z-index:1;
+  transition:all 0.35s;
+}
+.h-step:hover .h-step-num{background:var(--gold);color:var(--black);border-color:var(--gold)}
+.h-step-title{
+  font-family:'Playfair Display',serif;
+  font-size:1rem;font-weight:500;margin-bottom:10px;
+}
+.h-step-desc{font-size:0.78rem;color:var(--muted);line-height:1.8;font-weight:300}
 
 /* ─────────────────────────────────────────
    TESTIMONIALS
@@ -1072,6 +1095,9 @@ footer{
 
   /* EXECUTION STAGE */
   .execution-steps{grid-template-columns:1fr;gap:32px}
+
+  /* HANDOVER STAGE */
+  .handover-steps{grid-template-columns:1fr;gap:32px}
 
   /* TESTIMONIALS */
   .testi-card{padding:32px 24px}
@@ -1531,6 +1557,54 @@ footer{
       <div class="e-step-num">08</div>
       <h4 class="e-step-title">Payment Milestone</h4>
       <p class="e-step-desc">45% payment upon completion of the above execution stage.</p>
+    </div>
+  </div>
+</section>
+
+<div class="gold-line"></div>
+
+<!-- HANDOVER STAGE -->
+<section id="handover-stage" class="cv-auto theme-light">
+  <div class="reveal" style="text-align:center">
+    <span class="lbl">Handover Phase</span>
+    <h2 class="sec-title">Handover <em>Stage</em></h2>
+    <div class="rule rule-center"></div>
+  </div>
+  <div class="handover-steps">
+    <div class="h-step reveal delay-1">
+      <div class="h-step-num">01</div>
+      <h4 class="h-step-title">Finishing Works</h4>
+      <p class="h-step-desc">Completion of all woodwork finishes. Final painting and touch-up works.</p>
+    </div>
+    <div class="h-step reveal delay-2">
+      <div class="h-step-num">02</div>
+      <h4 class="h-step-title">Electrical & Appliance Installation</h4>
+      <p class="h-step-desc">Installation of lights, fans, and air conditioners.</p>
+    </div>
+    <div class="h-step reveal delay-3">
+      <div class="h-step-num">03</div>
+      <h4 class="h-step-title">Surface & Décor Installation</h4>
+      <p class="h-step-desc">Glass and mirror installation. Corian countertop installation (if applicable). Wallpaper installation. Curtain and blind installation.</p>
+    </div>
+    <div class="h-step reveal delay-4">
+      <div class="h-step-num">04</div>
+      <h4 class="h-step-title">Furniture Installation</h4>
+      <p class="h-step-desc">Procurement and installation of loose furniture as per design.</p>
+    </div>
+    <div class="h-step reveal delay-5">
+      <div class="h-step-num">05</div>
+      <h4 class="h-step-title">Cleaning & Quality Check</h4>
+      <p class="h-step-desc">Deep cleaning of the entire space. Final cleaning before handover. Snag check and rectification of any pending items.</p>
+    </div>
+    <div class="h-step reveal delay-1">
+      <div class="h-step-num">06</div>
+      <h4 class="h-step-title">Final Payment</h4>
+      <p class="h-step-desc">Collection of the remaining 5% payment.</p>
+    </div>
+    <div class="h-step reveal delay-2">
+      <div class="h-step-num">07</div>
+      <h4 class="h-step-title">Happy Handover</h4>
+      <p class="h-step-desc">Project completion and handover of your beautifully designed space.</p>
     </div>
   </div>
 </section>
