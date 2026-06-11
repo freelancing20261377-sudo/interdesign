@@ -666,6 +666,29 @@ section{padding:150px 7%}
 .d-step-desc{font-size:0.78rem;color:var(--muted);line-height:1.8;font-weight:300}
 
 /* ─────────────────────────────────────────
+   EXECUTION STAGE
+───────────────────────────────────────── */
+#execution-stage{background:var(--surface);text-align:center}
+.execution-steps{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:40px 32px;margin-top:64px;position:relative;
+}
+.e-step{padding:0 8px;position:relative}
+.e-step-num{
+  width:60px;height:60px;border:1px solid var(--line);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 20px;
+  font-family:'Playfair Display',serif;font-size:1.1rem;color:#FFFFFF;
+  background:var(--surface);position:relative;z-index:1;
+  transition:all 0.35s;
+}
+.e-step:hover .e-step-num{background:var(--gold);color:var(--black);border-color:var(--gold)}
+.e-step-title{
+  font-family:'Playfair Display',serif;
+  font-size:1rem;font-weight:500;margin-bottom:10px;
+}
+.e-step-desc{font-size:0.78rem;color:var(--muted);line-height:1.8;font-weight:300}
+
+/* ─────────────────────────────────────────
    TESTIMONIALS
 ───────────────────────────────────────── */
 #testimonials{background:var(--black);overflow:hidden}
@@ -1046,6 +1069,9 @@ footer{
 
   /* DESIGN STAGE */
   .design-steps{grid-template-columns:1fr;gap:32px}
+
+  /* EXECUTION STAGE */
+  .execution-steps{grid-template-columns:1fr;gap:32px}
 
   /* TESTIMONIALS */
   .testi-card{padding:32px 24px}
@@ -1452,6 +1478,59 @@ footer{
       <div class="d-step-num">09</div>
       <h4 class="d-step-title">Payment Milestone</h4>
       <p class="d-step-desc">40% payment upon approval of designs and drawings.</p>
+    </div>
+  </div>
+</section>
+
+<div class="gold-line"></div>
+
+<!-- EXECUTION STAGE -->
+<section id="execution-stage" class="cv-auto theme-light">
+  <div class="reveal" style="text-align:center">
+    <span class="lbl">Execution Phase</span>
+    <h2 class="sec-title">Execution <em>Stage</em></h2>
+    <div class="rule rule-center"></div>
+  </div>
+  <div class="execution-steps">
+    <div class="e-step reveal delay-1">
+      <div class="e-step-num">01</div>
+      <h4 class="e-step-title">Site Preparation</h4>
+      <p class="e-step-desc">Design marking and layout setting at the site. Floor protection to prevent damage during execution.</p>
+    </div>
+    <div class="e-step reveal delay-2">
+      <div class="e-step-num">02</div>
+      <h4 class="e-step-title">Civil & Plumbing Works</h4>
+      <p class="e-step-desc">Civil modifications and plumbing work, if required as per design.</p>
+    </div>
+    <div class="e-step reveal delay-3">
+      <div class="e-step-num">03</div>
+      <h4 class="e-step-title">False Ceiling Framework</h4>
+      <p class="e-step-desc">Installation of ceiling channels and framework.</p>
+    </div>
+    <div class="e-step reveal delay-4">
+      <div class="e-step-num">04</div>
+      <h4 class="e-step-title">Electrical Works</h4>
+      <p class="e-step-desc">Electrical wiring and point provisions as per approved designs and drawings.</p>
+    </div>
+    <div class="e-step reveal delay-5">
+      <div class="e-step-num">05</div>
+      <h4 class="e-step-title">False Ceiling Installation</h4>
+      <p class="e-step-desc">Fixing of Gypsum Boards / POP Boards as per the finalized design.</p>
+    </div>
+    <div class="e-step reveal delay-1">
+      <div class="e-step-num">06</div>
+      <h4 class="e-step-title">Woodwork Execution</h4>
+      <p class="e-step-desc">Manufacturing and installation of all carpentry and modular furniture work.</p>
+    </div>
+    <div class="e-step reveal delay-2">
+      <div class="e-step-num">07</div>
+      <h4 class="e-step-title">Primer / First Coat Painting</h4>
+      <p class="e-step-desc">Application of the first coat of paint for surface preparation.</p>
+    </div>
+    <div class="e-step reveal delay-3">
+      <div class="e-step-num">08</div>
+      <h4 class="e-step-title">Payment Milestone</h4>
+      <p class="e-step-desc">45% payment upon completion of the above execution stage.</p>
     </div>
   </div>
 </section>
